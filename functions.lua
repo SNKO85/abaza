@@ -342,8 +342,8 @@ list_settings = '{"inline_keyboard": ['
 ..']}'
 msg.KeyboardCmd = list_settings
 textMD = [[
-- ⊱「 [S O U R C E](https://t.me/Nvvv2)」
-- ⊱「 [𝐀 𝐋 𝐎 𝐍 𝐄 ♪](https://t.me/jjjjvj)」
+- ⊱「 [S O U R C E](https://t.me/EEJEEE)」
+- ⊱「 [F A W A Z](https://t.me/jjjjvj)」
 ]]
 GetUserID(msg.sender_user_id_,function(arg,data)
 msg = arg.msg
@@ -367,7 +367,7 @@ list_settings = '{"inline_keyboard": ['
 ..']}'
 msg.KeyboardCmd = list_settings
 textMD = [[ 
-  *العاب بوت فيدرا 🏌🏻‍♂️*  
+  *العاب بوت شهد 🧚‍♀️*  
 ⇠  لتفعيل الالعاب او تعطيلها ارسل
 ⇠  تفعـيل ⇠ تعطيل ⇠ الالعاب
 ————————————
@@ -390,7 +390,7 @@ textMD = [[
 ———————————
   • مجوهراتي ⇠ عشان تشوف عدد مجوهراتك 
 • بيع مجوهراتي + عدد مجوهراتك للأستبدال 
-༄「 [𝐀 𝐋 𝐎 𝐍 𝐄 ♪](https://t.me/jjjjvj)」
+༄「 [F A W A Z](https://t.me/jjjjvj)」
 ]] 
 GetUserID(msg.sender_user_id_,function(arg,data)
 msg = arg.msg
