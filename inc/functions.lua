@@ -136,8 +136,8 @@ end
 
 keyboardCmd = [[{
 "inline_keyboard": [
-[{"text": "1","callback_data": "List1"},{"text": "2","callback_data": "List2"}],[{"text": "3","callback_data": "List3"},
-{"text": "الالعاب","callback_data": "List4"}],[{"text": "السورس","callback_data": "CmdSudo"},{"text": "𝟔","callback_data": "CmdFiles"}],
+[{"text": "1","callback_data": "List1"},{"text": "2","callback_data": "List2"},{"text": "3","callback_data": "List3"},
+[{"text": "الالعاب","callback_data": "List4"}],{"text": "السورس","callback_data": "CmdSudo"},
 [{"text": "- اخفاء الامر","callback_data": "LoginOut"}]
 ]}
 ]]
@@ -431,45 +431,6 @@ textMD = [[ - اهلا بك في قائمة اوامر المطورين
 GetUserID(msg.sender_user_id_,function(arg,data)
 msg = arg.msg
 local textD = redis:get(boss..":awamer_Klesha_mtwr:")
-if textD then
-textD = Flter_Markdown(convert_Klmat(msg,data,textD,true))
-else
-textD = textMD
-end
-msg.textmsg = textD
-msg.Editeinline = true
-return SendMsgInline(msg)
-end,{msg=msg})
-return false
-end
-
-function UpdateM6Query(msg)
-list_settings = '{"inline_keyboard": ['
-..'[{"text": "- رجوع »","callback_data": "CmdBack"},{"text": "- اخفاء الامر","callback_data": "LoginOut"}]'
-..']}'
-msg.KeyboardCmd = list_settings
-textMD = [[ ﹎﹎﹎ اوامر التسليه ﹎﹎﹎
-• رفع-تنزيل ← قرد
-•️ رفع-تنزيل ← قلبي
-• رفع-تنزيل ← وتكه
-• رفع-تنزيل ← زوجتي
-• رفع-تنزيل ← زوجي
-
-• مسح القرده
-• مسح قلوبي
-• مسح الوتك
-• مسح ازواجي
-• مسح زوجاتي
-
-• قائمه القرده
-• قائمه قلوبي
-•️ قائمه الوتك
-• قائمه ازواجي
-• قائمه زوجاتي
-]]
-GetUserID(msg.sender_user_id_,function(arg,data)
-msg = arg.msg
-local textD = redis:get(boss..":awamer_Klesha_mf:")
 if textD then
 textD = Flter_Markdown(convert_Klmat(msg,data,textD,true))
 else
