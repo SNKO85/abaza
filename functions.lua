@@ -30,68 +30,52 @@ local dataid = data.message_id_
 msg = data
 
 if TextCmdquery == "GroupSitting" then
-if not CheckUserAdmin(msg) then return answerCallbackQuery(data.id_,"ليس لديك صلاحية التحكم , ارجو المعذرة ❤️",true) end
+if not CheckUserAdmin(msg) then return answerCallbackQuery(data.id_,"لا تبعص",true) end
 return UpdateGropSitting(msg)
 elseif TextCmdquery == "MediaSitting" then
-if not CheckUserAdmin(msg) then return answerCallbackQuery(data.id_,"ليس لديك صلاحية التحكم , ارجو المعذرة ❤️",true) end
+if not CheckUserAdmin(msg) then return answerCallbackQuery(data.id_,"لا تبعص",true) end
 return UpdateMediaSitting(msg)
 elseif TextCmdquery == "OtherSetting" then
-if not CheckUserAdmin(msg) then return answerCallbackQuery(data.id_,"ليس لديك صلاحية التحكم , ارجو المعذرة ❤️",true) end
+if not CheckUserAdmin(msg) then return answerCallbackQuery(data.id_,"لا تبعص",true) end
 return UpdateOtherSitting(msg)
 elseif TextCmdquery == "List1" then
-if not CheckUserAdmin(msg) then return answerCallbackQuery(data.id_,"ليس لديك صلاحية التحكم , ارجو المعذرة ❤️",true) end
+if not CheckUserAdmin(msg) then return answerCallbackQuery(data.id_,"لا تبعص",true) end
 return UpdateM1Query(msg)
 elseif TextCmdquery == "List2" then
-if not CheckUserAdmin(msg) then return answerCallbackQuery(data.id_,"ليس لديك صلاحية التحكم , ارجو المعذرة ❤️",true) end
+if not CheckUserAdmin(msg) then return answerCallbackQuery(data.id_,"لا تبعص",true) end
 return UpdateM2Query(msg)
 elseif TextCmdquery == "List3" then
-if not CheckUserAdmin(msg) then return answerCallbackQuery(data.id_,"ليس لديك صلاحية التحكم , ارجو المعذرة ❤️",true) end
+if not CheckUserAdmin(msg) then return answerCallbackQuery(data.id_,"لا تبعص",true) end
 return UpdateM3Query(msg)
 elseif TextCmdquery == "List4" then
-if not CheckUserAdmin(msg) then return answerCallbackQuery(data.id_,"ليس لديك صلاحية التحكم , ارجو المعذرة ❤️",true) end
+if not CheckUserAdmin(msg) then return answerCallbackQuery(data.id_,"لا تبعص",true) end
 return UpdateM4Query(msg)
 elseif TextCmdquery == "CmdSudo" then
-if not CheckUserAdmin(msg) then return answerCallbackQuery(data.id_,"ليس لديك صلاحية التحكم , ارجو المعذرة ❤️",true) end
+if not CheckUserAdmin(msg) then return answerCallbackQuery(data.id_,"لا تبعص",true) end
 return UpdateM5Query(msg)
+elseif TextCmdquery == "CmdFiles" then
+if not CheckUserAdmin(msg) then return answerCallbackQuery(data.id_,"لا تبعص",true) end
+return UpdateM6Query(msg)
 elseif TextCmdquery == "LoginOut" then
-if not CheckUserAdmin(msg) then return answerCallbackQuery(data.id_,"ليس لديك صلاحية التحكم , ارجو المعذرة ❤️",true) end
+if not CheckUserAdmin(msg) then return answerCallbackQuery(data.id_,"لا تبعص",true) end
 msg.Delete = true
 msg.textmsg = "- تم اخفاء قائمة الاوامر"
 msg.Editeinline = true
 return SendMsgInline(msg)
 elseif TextCmdquery == "CmdBack" then
-if not CheckUserAdmin(msg) then return answerCallbackQuery(data.id_,"ليس لديك صلاحية التحكم الادمن , ارجو المعذرة ❤️",true) end
+if not CheckUserAdmin(msg) then return answerCallbackQuery(data.id_,"لا تبعص",true) end
 msg.textmsg = [[ للاستفسار - []]..SUDO_USER..[[]
-➖➖➖
-
-- قائمه الاوامر 
-𝟏- م1 ( اوامر الإداره)
-𝟐- م2 ( اوامر إعدادات المجموعه )
-𝟑-م3 ( اوامر الحمايه ) 
-𝟒- م المطور ( اوامر المطور ) 
-𝟓- اوامر الرد ( لإضافه رد معين )
-𝟔- اوامر التسليه
-- اوامر الملفات ( للتحكم بالملفات ) 
-
-➖➖➖]]
+‏‌‌‏‌‌‌‌‏                                    
+*⇜ هلا فيك في اوامر البوت*
+]]
 msg.KeyboardCmd = keyboardCmd
 msg.Editeinline = true
 return SendMsgInline(msg)
 elseif TextCmdquery == "CmdBack1" then
-if not CheckUserAdmin(msg) then return answerCallbackQuery(data.id_,"ليس لديك صلاحية التحكم الادمن , ارجو المعذرة ❤️",true) end
+if not CheckUserAdmin(msg) then return answerCallbackQuery(data.id_,"لا تبعص",true) end
 msg.textmsg = [[ للاستفسار - []]..SUDO_USER..[[]
-➖➖➖
-
-- قائمه الاوامر 
-𝟏- م1 ( اوامر الإداره)
-𝟐- م2 ( اوامر إعدادات المجموعه )
-𝟑-م3 ( اوامر الحمايه ) 
-𝟒- م المطور ( اوامر المطور ) 
-𝟓- اوامر الرد ( لإضافه رد معين )
-𝟔- اوامر التسليه
-- اوامر الملفات ( للتحكم بالملفات ) 
-
-➖➖➖]]
+*⇜ هلا فيك في اوامر البوت‏‌‌‏‌‌‌‌‏*
+]]
 msg.KeyboardCmd = keyboardSitting
 msg.Editeinline = true
 return SendMsgInline(msg)
@@ -103,13 +87,13 @@ print(CmdSitting)
 if CmdSitting then
 local ResRedis =  redis:del(boss..CmdSitting..msg.chat_id_)
 if TextCmd == "Sitting3" then 
-if (CmdSitting == "antiedit") and not Get_Rtb(msg,"SuperCreator") then return  answerCallbackQuery(data.id_,"ليس لديك صلاحية التحكم فقط للمنشئ الاساسي , ارجو المعذرة ❤️",true) end
+if (CmdSitting == "antiedit") and not Get_Rtb(msg,"SuperCreator") then return  answerCallbackQuery(data.id_,"لا تبعص",true) end
 if (CmdSitting == "lock_linkk" or CmdSitting == "lock_takkl" or CmdSitting == "lock_leftgroup" or CmdSitting == "lock_KickBan") and not Get_Rtb(msg,"Creator") then
-return  answerCallbackQuery(data.id_,"ليس لديك صلاحية التحكم فقط للمنشئ , ارجو المعذرة ❤️",true) end
+return  answerCallbackQuery(data.id_,"لا تبعص",true) end
 if (CmdSitting == "lock_RandomRdod" or CmdSitting == "lock_rdodSource" or CmdSitting == "lock_cleaner" or CmdSitting == "idphoto") and not Get_Rtb(msg,"Director") then
-return  answerCallbackQuery(data.id_,"ليس لديك صلاحية التحكم فقط للمدير , ارجو المعذرة ❤️",true) end
+return  answerCallbackQuery(data.id_,"لا تبعص",true) end
 end      
-if not CheckUserAdmin(msg) then return answerCallbackQuery(data.id_,"ليس لديك صلاحية التحكم الادمن , ارجو المعذرة ❤️",true) end
+if not CheckUserAdmin(msg) then return answerCallbackQuery(data.id_,"لا تبعص",true) end
 if ResRedis == 0 then redis:set(boss..CmdSitting..msg.chat_id_,true) end
 if TextCmd == "Sitting1" then 
 UpdateGropSitting(msg)
@@ -126,19 +110,20 @@ local UserJoin = tonumber(UserJoin)
 if Text == "CheckRobotJoin:" then
 if CheckUserAdmin(msg) or UserID == UserJoin then
 Restrict(ChatID,UserJoin,2)
-EditMsg(ChatID,dataid,"- تم فك التقييد بنجاح والتاكد بانك لست روبوت ❤️")
-answerCallbackQuery(data.id_,"- تم فك التقييد بنجاح والتاكد بانك لست روبوت ❤️",true)
+EditMsg(ChatID,dataid,"تم التاكد بانك شخص حقيقي مو زومبي")
+answerCallbackQuery(data.id_,"تقدر ترسل الحين",true)
 else
-answerCallbackQuery(data.id_,"عذرا انت لست الشخص المقيد او لا يوجد لديك صلاحيه الادارة , نعتذر منك",true)	
+answerCallbackQuery(data.id_,"انت الشخص الي مو مقييد او مامعك صلاحيه الاداره، اسفين",true)	
 end
 end
 end
 
 keyboardCmd = [[{
 "inline_keyboard": [
-[{"text": "1","callback_data": "List1"},{"text": "2","callback_data": "List2"},{"text": "3","callback_data": "List3"},
-[{"text": "الالعاب","callback_data": "List4"}],{"text": "السورس","callback_data": "CmdSudo"}],
-[{"text": "- اخفاء الامر","callback_data": "LoginOut"}]
+[{"text": "م1","callback_data": "List1"},{"text": "م2","callback_data": "List2"}],
+[{"text": "م3","callback_data": "List3"}],
+[{"text": "الالعاب","callback_data": "CmdSudo"},{"text": "السورس","callback_data": "List4"}],
+[{"text": "","callback_data": "LoginOut"}]
 ]}
 ]]
 
