@@ -823,7 +823,7 @@ sendMsg(msg.chat_id_,msg.id_,[[
   • مجوهراتي ⇠ عشان تشوف عدد مجوهراتك 
 • بيع مجوهراتي + عدد مجوهراتك للأستبدال 
 
-༄「 F A W A Z」
+༄「[F A W A Z](htpps://t.me/JJJJvJ)」
 ]])
 end
 end
