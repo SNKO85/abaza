@@ -549,6 +549,81 @@ sendMsg(msg.chat_id_,msg.id_,TEST)
 redis:setex(boss.."GAME:TKMEN" .. msg.chat_id_ .. "" .. msg.sender_user_id_, 100, true)  
 return false  
 end
+
+if MsgText[1] == 'انجليزي' or MsgText[1] == 'الانجليزي' then
+  katu = {
+  'افتح','باب','الافضل','جدار','طيران','ورده','جيد','سيء','اريد','غريب','خطير','يهتم','حفظ','تحرك','ربما','ثقة','حقيقه','صندوق','يد','شجاع','هادئ','حذر','مرح','ذكي','جبان','مجنون','عاطفي','ودود','مضحك','كريم','صادق','غير صبور','غير مهذب','حنون','كسول','حقير','مريض',
+  };
+  name = katu[math.random(#katu)]
+  redis:set(boss..':Set_ang:'..msg.chat_id_,name)
+  name = string.gsub(name,'افتح','Open')
+  name = string.gsub(name,'باب','Door')
+  name = string.gsub(name,'الافضل','Best')
+  name = string.gsub(name,'جدار','Wall')
+  name = string.gsub(name,'طيران','Fly')
+  name = string.gsub(name,'ورده','Flower')
+  name = string.gsub(name,'جيد','Good')
+  name = string.gsub(name,'سيء','Bay')
+  name = string.gsub(name,'اريد','Want')
+  name = string.gsub(name,'غريب','Stranger')
+  name = string.gsub(name,'خطير','Dangerous')
+  name = string.gsub(name,'يهتم','Care')
+  name = string.gsub(name,'حفظ','Save')
+  name = string.gsub(name,'تحرك','Move')
+  name = string.gsub(name,'ربما','Maybe')
+  name = string.gsub(name,'ثقة','Trust')
+  name = string.gsub(name,'حقيقه','Truth')
+  name = string.gsub(name,'صندوق','Box')
+  name = string.gsub(name,'يد','Hand')
+  name = string.gsub(name,'شجاع','Brave')
+  name = string.gsub(name,'هادئ','Calm')
+  name = string.gsub(name,'حذر','Cautious')
+  name = string.gsub(name,'مرح','Cheerful')
+  name = string.gsub(name,'ذكي','Clever')
+  name = string.gsub(name,'جبان','Cowardly')
+  name = string.gsub(name,'مجنون','Crazy')
+  name = string.gsub(name,'عاطفي','Emotional')
+  name = string.gsub(name,'ودود','Friendly')
+  name = string.gsub(name,'مضحك','Funny')
+  name = string.gsub(name,'كريم','Generous')
+  name = string.gsub(name,'صادق','Honest')
+  name = string.gsub(name,'غير صبور','Impatient')
+  name = string.gsub(name,'غير مهذب','Impolite')
+  name = string.gsub(name,'حنون','Kind')
+  name = string.gsub(name,'كسول','Lazy')
+  name = string.gsub(name,'حقير','Mean')
+  name = string.gsub(name,'مريض','Patient')
+  return 'اجب على معنى الكلمة (* '..name..' *)'
+  end
+
+if MsgText[1] == 'رياضيات' then
+katu = {
+'95','399','144','119','-2','9','8','55','511','114','877','153','509','932','211','7','67','143','515','515',
+};
+name = katu[math.random(#katu)]
+redis:set(boss..':Set_ria:'..msg.chat_id_,name)
+name = string.gsub(name,'95','12+83')
+name = string.gsub(name,'399','491-92')
+name = string.gsub(name,'9','3+6')
+name = string.gsub(name,'119','37+82')
+name = string.gsub(name,'-2','5+18-25')
+name = string.gsub(name,'877','300+827-250')
+name = string.gsub(name,'8','2+7-1')
+name = string.gsub(name,'55','36+19')
+name = string.gsub(name,'114','6+8+100')
+name = string.gsub(name,'143','62+72')
+name = string.gsub(name,'144','62+82')
+name = string.gsub(name,'153','72+81')
+name = string.gsub(name,'932','566+566-200')
+name = string.gsub(name,'211','139+72')
+name = string.gsub(name,'7','6+7-6')
+name = string.gsub(name,'67','55+12')
+name = string.gsub(name,'515','514+1')
+name = string.gsub(name,'515','100+415')
+name = string.gsub(name,'511','500+11')
+name = string.gsub(name,'509','500+9')
+return 'اجـب على المسئله الحسابيه التالية ↤ (* '..name..' *)'
+end
 if (MsgText[1] == 'اسرع' or MsgText[1] == 'الاسرع') then
 local NUM = math.random(10,1000)
 redis:set(boss..':NUM_SET:'..msg.chat_id_,(NUM * 3))
@@ -561,6 +636,32 @@ else
 return '️┇اول من يكتب هذه السمايل يفوز ››    `'..(redis:get(boss..':Set_Smile:'..msg.chat_id_))..'`'
 end
 end
+
+if MsgText[1] == 'تركيب' then
+  katu = {'احبك','ذئب','بعير','طير','ورده','جميل ','حلو','بطريق','طماطم','موز','سيارة','تحريك','فلوس','بوت','ثقة','حلزون','مكيف','مروحه'
+  };
+  name = katu[math.random(#katu)]
+  redis:set(boss..':Set_trkib:'..msg.chat_id_,name)
+  name = string.gsub(name,'احبك','ا ح ب ك')
+  name = string.gsub(name,'ذئب','ذ ئ ب')
+  name = string.gsub(name,'بعير','ب ع ي ر')
+  name = string.gsub(name,'طير','ط ي ر')
+  name = string.gsub(name,'ورده','و ر د ه')
+  name = string.gsub(name,'جميل','ج م ي ل')
+  name = string.gsub(name,'حلو','ح ل و')
+  name = string.gsub(name,'بطريق','ب ط ر ي ق')
+  name = string.gsub(name,'طماطم','ط م ا ط م')
+  name = string.gsub(name,'موز','م و ز')
+  name = string.gsub(name,'سيارة','س ي ا ر ة')
+  name = string.gsub(name,'تحريك','ت ح ر ي ك')
+  name = string.gsub(name,'فلوس','ف ل و س')
+  name = string.gsub(name,'بوت','ب و ت')
+  name = string.gsub(name,'ثقة','ث ق ة')
+  name = string.gsub(name,'حلزون','ح ل ز و ن')
+  name = string.gsub(name,'مكيف','م ك ي ف')
+  name = string.gsub(name,'مروحه','م ر و ح ه')
+  return 'اسرع واحد يركب (* '..name..' *)'
+  end
 
 if MsgText[1] == 'ترتيب' then
 if not Arry_Word or not redis:get(boss..":GetInfoNow:") then
@@ -712,7 +813,7 @@ end
 sendMsg(msg.chat_id_,msg.id_,SENDTEXT)     
 return false  
 end
-if MsgText[1] == 'نقاطي' then 
+if MsgText[1] == 'مجوهراتي' then 
 local points = redis:get(boss..':User_Points:'..msg.chat_id_..msg.sender_user_id_)
 if points and points ~= "0" then
 return '*📮¦ عدد النقاط التي ربحتها هي » { '..points..' }\n📬¦ تسطيع بيع نقاطك ولحصول على (100) رساله مقابل كل نقطه من النقاط *\n'
@@ -720,7 +821,7 @@ else
 return ' *💬¦ ليس لديك نقاط ،\n📬¦ للحصول ؏ النقاط ،\n📮¦ ارسل الالعاب وابدأ اللعب ! *'
 end
 end
-if MsgText[1] == 'بيع نقاطي' then
+if MsgText[1] == 'بيع مجوهراني' then
 if MsgText[2] == "0" then
 return '📛¦ هناك خطأ عزيزي  \n🔖¦ يجب ان يكون البيع ع الاقل 1 من النقاط . 'end
 local points = redis:get(boss..':User_Points:'..msg.chat_id_..msg.sender_user_id_)
@@ -753,7 +854,7 @@ return [[
 • تخمين ⇠ لعبه تخمين الكلمه 
 • الاسرع ⇠ لعبه اسرع واحد 
 • كت تويت ⇠ لعبه التسليه 
-• انقليزي ⇠ لعبه ترجمة انقليزي
+• انجليزي ⇠ لعبه ترجمة انجليزي
 • تفكيك ⇠ لعبه تفكيك الكلمات
 • تركيب ⇠ لعبه تركيب الكلمات
 • رياضيات ⇠ لعبة الرياضيات
@@ -1031,15 +1132,15 @@ Boss = {
 '^(تفعيل اللعبة)$',
 "^(اسرع)$",
 "^(الاسرع)$",
-"^(نقاطي)$",
+"^(مجوهراتي)$",
 "^(ترتيب)$",
 "^(معاني)$",
 "^(عكس)$",
 "^(العكس)$", 
 "^(العكسس)$", 
-"^(بيع نقاطي) (%d+)$",
+"^(بيع مجوهراتي) (%d+)$",
 "^(اضف رسائل) (%d+)$",
-"^(اضف نقاط) (%d+)$",
+"^(اضف مجوهرات) (%d+)$",
 "^(روليت)$",
 "^(اسئله)$",
 "^(قائمه الالعاب)$",
