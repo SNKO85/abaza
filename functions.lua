@@ -2232,7 +2232,7 @@ if data.channel_ and data.channel_.status_.ID  == "ChatMemberStatusMember" then
 return sendMsg(arg.chat_id_,arg.id_,'- عذرا البوت ليس ادمن  في المجموعه \n- يرجى رفعه ادمن لتتمكن من تفعيل البوت ')
 end
 if arg.lock_servicez then 
-sendMsg(arg.chat_id_,arg.id_,'- تـم تـفـعـيـل الـمـجـمـوعـه  \n- وتم رفع جمـيع الادمـنية‏‏‏ الكروب بالبوت \n- بواسطه ⋙「 '..NameUser..' 」 \n')
+sendMsg(arg.chat_id_,arg.id_,'- تـم تـفـعـيـل الـمـجـمـوعـه  \n- وتم رفع جمـيع الادمـنية‏‏‏ بالبوت \n- بواسطه ⋙「 '..NameUser..' 」 \n')
 else
 sendMsg(arg.chat_id_,arg.id_,'- تـم تـفـعـيـل المـجمـوعة‏‏ \n- بواسطه ⋙「 '..NameUser..' 」 \n')
 end
