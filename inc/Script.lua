@@ -4606,29 +4606,12 @@ end
 
 
 
-if MsgText[1] == "باسل"  then
-local text = " اهلاً بك عزيزي"
-local inline = {
-{{text = '-𝐃𝐄𝐕 👑',url="https://t.me/jjjjvj"}},
-}   
-return send_inline(msg.chat_id_,text,inline,msg.id_)
-end
-
-
-if MsgText[1] == "فواز" then
-local text = " [مطور السورس🌐 ](t.me/jjjjvj)"
-local inline = {
-{{text = '-𝙳𝙴𝚅 👑',url="https://t.me/jjjjvj"}},
-}   
-return send_inline(msg.chat_id_,text,inline,msg.id_)
-end
-
 if MsgText[1] == "السورس" or MsgText[1]=="سورس" then
 local text = "اهلا وسهلا بك بسورس فواز"
 local inline = {
 {{text = '𝐒𝐎𝐔𝐑𝐂𝐄 𝐅𝐀𝐖𝐀𝐙',url="https://t.me/eejeee"}},
 {{text = '𝐃𝐄𝐕',url="https://t.me/jjjjvj"}},
-{{text = '𝐓𝐖𝐀𝐒𝐎𝐋',url="https://t.me/d65bot"}},
+{{text = '𝐃𝐄𝐕',url="https://t.me/YHHHL"}},
 }   
 return send_inline(msg.chat_id_,text,inline,msg.id_)
 end
