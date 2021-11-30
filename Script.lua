@@ -4620,29 +4620,12 @@ end
 
 
 
-if MsgText[1] == "سورس البوت"  then
-local text = " اهلاً بك عزيزي"
-local inline = {
-{{text = '-𝐃𝐄𝐕',url="https://t.me/jjjjvj"}},
-}   
-return send_inline(msg.chat_id_,text,inline,msg.id_)
-end
-
-
-if MsgText[1] == "مطور السورس" then
-local text = " [مطور السورس🌐 ](t.me/jjjjvj)"
-local inline = {
-{{text = '-𝙳𝙴𝚅 👑',url="https://t.me/jjjjvj"}},
-}   
-return send_inline(msg.chat_id_,text,inline,msg.id_)
-end
-
 if MsgText[1] == "السورس" or MsgText[1]=="سورس" then
 local video = redis:hget(boss..'https://t.me/rrokkkaaa/19692',msg.text)
 local inline = {
 {{text = '𝐒𝐨𝐮𝐫𝐜𝐞 𝐅𝐚𝐰𝐚𝐳',url="https://t.me/eejeee"}},
 {{text = '𝐃𝐄𝐕',url="https://t.me/jjjjvj"}},
-{{text = '𝐓𝐖𝐀𝐒𝐎𝐋',url="https://t.me/d65bot"}},
+{{text = '𝐃𝐄𝐕',url="https://t.me/YHHHL"}},
 }   
 return send_inline(msg.chat_id_,text,inline,msg.id_)
 end
