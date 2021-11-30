@@ -561,8 +561,8 @@ local Cominnt = {
 'صورتك تجنن💕',
 "القمر طلع💙",
 "ما اجملك💕",
-"اجمل ما رأت عيني😍",
-"صورتك مش عجباني😕",
+"اجمل ما رأت عيني",
+"صورتك مو حلوه",
 }
 return Cominnt[math.random(#Cominnt)] 
 end
@@ -984,7 +984,7 @@ print("Update Source And Reload ~ ./inc/Run.lua")
 
 end
 ----------------------{ Get Name Bot }-----------------------------
-Bot_Name = redis:get(boss..":NameBot:") or "اباظة"
+Bot_Name = redis:get(boss..":NameBot:") or "فواز"
 
 
 function GetType(ChatID) 
@@ -2204,7 +2204,7 @@ if data.channel_ and data.channel_.status_.ID  == "ChatMemberStatusMember" then
 return sendMsg(arg.chat_id_,arg.id_,'- عذرا البوت ليس ادمن  في المجموعه \n- يرجى رفعه ادمن لتتمكن من تفعيل البوت ')
 end
 if arg.lock_servicez then 
-sendMsg(arg.chat_id_,arg.id_,'- تـم تـفـعـيـل الـمـجـمـوعـه  \n- وتم رفع جمـيع الادمـنية‏‏‏ الكروب بالبوت \n- بواسطه ⋙「 '..NameUser..' 」 \n')
+sendMsg(arg.chat_id_,arg.id_,'- تـم تـفـعـيـل الـمـجـمـوعـه  \n- وتم رفع جمـيع الادمـنية‏‏‏ بالبوت \n- بواسطه ⋙「 '..NameUser..' 」 \n')
 else
 sendMsg(arg.chat_id_,arg.id_,'- تـم تـفـعـيـل المـجمـوعة‏‏ \n- بواسطه ⋙「 '..NameUser..' 」 \n')
 end
