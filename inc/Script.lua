@@ -22,7 +22,7 @@ msg = arg.msg
 local NameUser   = Hyper_Link_Name(data)
 if not redis:get(boss..'group:add'..msg.chat_id_) then return sendMsg(msg.chat_id_,msg.id_,'- المجموعه بالتاكيد تم تعطيلها \n- بواسطه ⋙「 '..NameUser..' 」 \n') end  
 rem_data_group(msg.chat_id_)
-sendMsg(msg.chat_id_,msg.id_,'- تـم تـعـطـيـل الـمـجـمـوعـه \n- بواسطه ⋙「 '..NameUser..' 」 \n')
+sendMsg(msg.chat_id_,msg.id_,' تم تعطيل المجموعه \n- بواسطه ⋙「 '..NameUser..' 」 \n')
 end,{msg=msg})
 end
 
