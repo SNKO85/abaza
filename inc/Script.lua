@@ -464,6 +464,1593 @@ end
 
 
 
+if MsgText[1] == "تعطيل التسليه" and not MsgText[2] then
+return cmdss_on(msg)  
+end
+if MsgText[1] == "تفعيل التسليه" and not MsgText[2] then
+return cmdss_off(msg) 
+end
+
+function cmdss_on(msg)
+if not msg.Admin then return "*•*هذا الامر يخص ( الادمن,المدير,المنشئ,المطور ) بس  \n "
+end
+redis:set(boss..'lock:karaa:'..msg.chat_id_,'on')
+return "*•* اهلين عيني "..msg.TheRankCmd.."\n*•* ابشر عطلت التسليه \n "
+end
+function cmdss_off(msg)
+if not msg.Admin then return "*•*هذا الامر يخص ( الادمن,المدير,المنشئ,المطور ) بس  \n "
+end
+redis:set(boss..'lock:karaa:'..msg.chat_id_,'off')
+return "*•* اهلين عيني "..msg.TheRankCmd.."\n*•* ابشر فعلت التسليه\n "
+end
+
+
+--====================={ end of tf3el }===================
+
+--====================={ start of rf3 }===================
+
+
+
+--======={ زق }==========
+
+if MsgText[1] == "رفع زق" and MsgText[2] and MsgText[2]:match('@[%a%d_]+') then
+if not msg.Rank then end
+if MsgText[2]:match('@[%a%d_]+') then
+if redis:get(boss..'lock:karaa:'..msg.chat_id_) == 'off' then
+GetUserName(MsgText[2],function(msg,data)
+USERNAME = Flter_Markdown(msg.UserName)
+local NameUser = Hyper_Link_Name(data)
+local cmd = "Z"
+UserID = data.id_
+MsgID = msg.MsgID
+ChatID = msg.ChatID
+if cmd == "Z" then
+if UserID == our_id then 
+return sendMsg(ChatID,MsgID,"*•* مايمديك ترفعني! \n ") 
+elseif data.type_.ID == "UserTypeBot" then
+return sendMsg(ChatID,MsgID,"*•*مايمديك ترفع بوت! \n ") 
+elseif data.type_.ID == "ChannelChatInfo" then 
+end
+if redis:sismember(boss..':ZZ:'..ChatID,UserID) then 
+return SendMention(ChatID,UserID,MsgID,'• العضو 「 '..NameUser..' 」 \n• زق من قبل \n ',17,USERCAR) 
+end
+redis:sadd(boss..':ZZ:'..ChatID,UserID)
+return SendMention(ChatID,UserID,MsgID,'• العضو 「 '..NameUser..' 」 \n• رفعته صار زق \n ',17,USERCAR) 
+end
+
+
+end,{ChatID=msg.chat_id_,MsgID=msg.id_,UserName=MsgText[2]})
+
+
+end
+end
+if redis:get(boss..'lock:karaa:'..msg.chat_id_) == 'on' then  
+sendMsg(msg.chat_id_,msg.id_,"*•* اهلين عيني "..msg.TheRank.."\n*•* اوامر التسليه معطله\n ")
+end
+end
+
+if MsgText[1] == "رفع زق" and msg.reply_id then
+if not msg.Rank then end
+if not MsgText[2] and msg.reply_id then
+if redis:get(boss..'lock:karaa:'..msg.chat_id_) == 'off' then
+--sendMsg(msg.chat_id_,msg.id_,"*•* أهلا عزيزي "..msg.TheRank.."\n*•* اوامر التسليه معطله\n ")
+GetMsgInfo(msg.chat_id_,msg.reply_id,action_by_reply,{msg=msg,cmd="Z"})
+end
+end
+if redis:get(boss..'lock:karaa:'..msg.chat_id_) == 'on' then  
+sendMsg(msg.chat_id_,msg.id_,"*•* اهلين عيني "..msg.TheRank.."\n*•* اوامر التسليه معطله\n ")
+end
+return false
+end
+
+
+if MsgText[1] == "تنزيل زق" and MsgText[2] and MsgText[2]:match('@[%a%d_]+') then
+if not msg.Rank then end
+if MsgText[2]:match('@[%a%d_]+') then
+if redis:get(boss..'lock:karaa:'..msg.chat_id_) == 'off' then
+GetUserName(MsgText[2],function(msg,data)
+local USERNAME = Flter_Markdown(msg.UserName)
+local NameUser   = Hyper_Link_Name(data)
+local cmd = "ZZZ"
+local UserID = data.id_
+local MsgID = msg.MsgID
+local ChatID = msg.ChatID
+if cmd == "ZZZ" then
+if not redis:sismember(boss..':ZZ:'..ChatID,UserID) then 
+return SendMention(ChatID,UserID,MsgID,'• العضو 「 '..NameUser..' 」 \n• مو زق من قبل \n ',17,USERCAR) 
+end
+redis:srem(boss..':ZZ:'..ChatID,UserID)
+return SendMention(ChatID,UserID,MsgID,'• العضو 「 '..NameUser..' 」\n• نزلته من قائمة الزق \n ',17,USERCAR) 
+end
+
+
+end,{ChatID=msg.chat_id_,MsgID=msg.id_,UserName=MsgText[2]})
+
+
+end
+end
+if redis:get(boss..'lock:karaa:'..msg.chat_id_) == 'on' then  
+sendMsg(msg.chat_id_,msg.id_,"*•* اهلين عيني "..msg.TheRank.."\n*•* اوامر التسليه معطله\n ")
+end
+end
+
+if MsgText[1] == "تنزيل زق" then
+if not msg.Rank then end
+if not MsgText[2] and msg.reply_id then
+GetMsgInfo(msg.chat_id_,msg.reply_id,action_by_reply,{msg=msg,cmd="ZZZ"})
+end
+return false
+end
+
+
+--======={ كيك }==========
+
+
+if MsgText[1] == "رفع كيكه" and MsgText[2] and MsgText[2]:match('@[%a%d_]+') then
+if MsgText[2]:match('@[%a%d_]+') then
+if redis:get(boss..'lock:karaa:'..msg.chat_id_) == 'off' then
+GetUserName(MsgText[2],function(msg,data)
+USERNAME = Flter_Markdown(msg.UserName)
+local NameUser = Hyper_Link_Name(data)
+local cmd = "k"
+UserID = data.id_
+MsgID = msg.MsgID
+ChatID = msg.ChatID
+if cmd == "k" then
+if UserID == our_id then 
+return sendMsg(ChatID,MsgID,"*•* مايمديك ترفعني! \n ") 
+elseif data.type_.ID == "UserTypeBot" then
+return sendMsg(ChatID,MsgID,"*•* مايمديك ترفع بوت! \n ") 
+elseif data.type_.ID == "ChannelChatInfo" then 
+end
+if redis:sismember(boss..':kk:'..ChatID,UserID) then 
+return SendMention(ChatID,UserID,MsgID,'• العضو 「 '..NameUser..' 」 \n• كيكه من قبل \n ',17,USERCAR) 
+end
+redis:sadd(boss..':kk:'..ChatID,UserID)
+return SendMention(ChatID,UserID,MsgID,'• العضو 「 '..NameUser..' 」 \n• رفعته صار كيكه \n ',17,USERCAR) 
+end
+
+
+end,{ChatID=msg.chat_id_,MsgID=msg.id_,UserName=MsgText[2]})
+
+
+end
+end
+if redis:get(boss..'lock:karaa:'..msg.chat_id_) == 'on' then  
+sendMsg(msg.chat_id_,msg.id_,"*•* اهلين عيني "..msg.TheRank.."\n*•* اوامر التسليه معطله\n ")
+end
+end
+
+if MsgText[1] == "رفع كيكه" and msg.reply_id then
+if not MsgText[2] and msg.reply_id then
+if redis:get(boss..'lock:karaa:'..msg.chat_id_) == 'off' then
+--sendMsg(msg.chat_id_,msg.id_,"*•* أهلا عزيزي "..msg.TheRank.."\n*•* اوامر التسليه معطله\n ")
+GetMsgInfo(msg.chat_id_,msg.reply_id,action_by_reply,{msg=msg,cmd="k"})
+end
+end
+if redis:get(boss..'lock:karaa:'..msg.chat_id_) == 'on' then  
+sendMsg(msg.chat_id_,msg.id_,"*•* اهلين عيني "..msg.TheRank.."\n*•* اوامر التسليه معطله\n ")
+end
+return false
+end
+
+
+if MsgText[1] == "تنزيل كيكه" and MsgText[2] and MsgText[2]:match('@[%a%d_]+') then
+if not msg.Rank then end
+if MsgText[2]:match('@[%a%d_]+') then
+if redis:get(boss..'lock:karaa:'..msg.chat_id_) == 'off' then
+GetUserName(MsgText[2],function(msg,data)
+local USERNAME = Flter_Markdown(msg.UserName)
+local NameUser   = Hyper_Link_Name(data)
+local cmd = "kkk"
+local UserID = data.id_
+local MsgID = msg.MsgID
+local ChatID = msg.ChatID
+if cmd == "kkk" then
+if not redis:sismember(boss..':kk:'..ChatID,UserID) then 
+return SendMention(ChatID,UserID,MsgID,'• العضو 「 '..NameUser..' 」 \n• مو كيكه من قبل \n ',17,USERCAR) 
+end
+redis:srem(boss..':kk:'..ChatID,UserID)
+return SendMention(ChatID,UserID,MsgID,'• العضو 「 '..NameUser..' 」\n• نزلته من قائمة الكيك \n ',17,USERCAR) 
+end
+
+
+end,{ChatID=msg.chat_id_,MsgID=msg.id_,UserName=MsgText[2]})
+
+
+end
+end
+if redis:get(boss..'lock:karaa:'..msg.chat_id_) == 'on' then  
+sendMsg(msg.chat_id_,msg.id_,"*•* اهلين عيني "..msg.TheRank.."\n*•* اوامر التسليه معطله\n ")
+end
+end
+
+if MsgText[1] == "تنزيل كيكه" then
+if not msg.Rank then end
+if not MsgText[2] and msg.reply_id then
+GetMsgInfo(msg.chat_id_,msg.reply_id,action_by_reply,{msg=msg,cmd="kkk"})
+end
+return false
+end
+
+
+--======={ حمار }==========
+
+
+if MsgText[1] == "رفع حمار" and MsgText[2] and MsgText[2]:match('@[%a%d_]+') then
+if MsgText[2]:match('@[%a%d_]+') then
+if redis:get(boss..'lock:karaa:'..msg.chat_id_) == 'off' then
+GetUserName(MsgText[2],function(msg,data)
+USERNAME = Flter_Markdown(msg.UserName)
+local NameUser = Hyper_Link_Name(data)
+local cmd = "h"
+UserID = data.id_
+MsgID = msg.MsgID
+ChatID = msg.ChatID
+if cmd == "h" then
+if UserID == our_id then 
+return sendMsg(ChatID,MsgID,"*•* مايمديك ترفعني! \n ") 
+elseif data.type_.ID == "UserTypeBot" then
+return sendMsg(ChatID,MsgID,"*•* مايمديك ترفع بوت! \n ") 
+elseif data.type_.ID == "ChannelChatInfo" then 
+end
+if redis:sismember(boss..':hh:'..ChatID,UserID) then 
+return SendMention(ChatID,UserID,MsgID,'• العضو 「 '..NameUser..' 」 \n• حمار من قبل \n ',17,USERCAR) 
+end
+redis:sadd(boss..':hh:'..ChatID,UserID)
+return SendMention(ChatID,UserID,MsgID,'• العضو 「 '..NameUser..' 」 \n• رفعته صار حمار \n ',17,USERCAR) 
+end
+
+
+end,{ChatID=msg.chat_id_,MsgID=msg.id_,UserName=MsgText[2]})
+
+
+end
+end
+if redis:get(boss..'lock:karaa:'..msg.chat_id_) == 'on' then  
+sendMsg(msg.chat_id_,msg.id_,"*•* اهلين عيني "..msg.TheRank.."\n*•* اوامر التسليه معطله\n ")
+end
+end
+
+if MsgText[1] == "رفع حمار" and msg.reply_id then
+if not MsgText[2] and msg.reply_id then
+if redis:get(boss..'lock:karaa:'..msg.chat_id_) == 'off' then
+--sendMsg(msg.chat_id_,msg.id_,"*•* أهلا عزيزي "..msg.TheRank.."\n*•* اوامر التسليه معطله\n ")
+GetMsgInfo(msg.chat_id_,msg.reply_id,action_by_reply,{msg=msg,cmd="h"})
+end
+end
+if redis:get(boss..'lock:karaa:'..msg.chat_id_) == 'on' then  
+sendMsg(msg.chat_id_,msg.id_,"*•* اهلين عيني "..msg.TheRank.."\n*•* اوامر التسليه معطله\n ")
+end
+return false
+end
+
+
+if MsgText[1] == "تنزيل حمار" and MsgText[2] and MsgText[2]:match('@[%a%d_]+') then
+if not msg.Rank then end
+if MsgText[2]:match('@[%a%d_]+') then
+if redis:get(boss..'lock:karaa:'..msg.chat_id_) == 'off' then
+GetUserName(MsgText[2],function(msg,data)
+local USERNAME = Flter_Markdown(msg.UserName)
+local NameUser   = Hyper_Link_Name(data)
+local cmd = "hhh"
+local UserID = data.id_
+local MsgID = msg.MsgID
+local ChatID = msg.ChatID
+if cmd == "hhh" then
+if not redis:sismember(boss..':hh:'..ChatID,UserID) then 
+return SendMention(ChatID,UserID,MsgID,'• العضو 「 '..NameUser..' 」 \n• مو حمار من قبل \n ',17,USERCAR) 
+end
+redis:srem(boss..':hh:'..ChatID,UserID)
+return SendMention(ChatID,UserID,MsgID,'• العضو 「 '..NameUser..' 」\n• نزلته من قائمة الحمير \n ',17,USERCAR) 
+end
+
+
+end,{ChatID=msg.chat_id_,MsgID=msg.id_,UserName=MsgText[2]})
+
+
+end
+end
+if redis:get(boss..'lock:karaa:'..msg.chat_id_) == 'on' then  
+sendMsg(msg.chat_id_,msg.id_,"*•* اهلين عيني "..msg.TheRank.."\n*•* اوامر التسليه معطله\n ")
+end
+end
+
+if MsgText[1] == "تنزيل حمار" then
+if not msg.Rank then end
+if not MsgText[2] and msg.reply_id then
+GetMsgInfo(msg.chat_id_,msg.reply_id,action_by_reply,{msg=msg,cmd="hhh"})
+end
+return false
+end
+
+
+
+--======={ عسل }==========
+
+
+if MsgText[1] == "رفع عسل" and MsgText[2] and MsgText[2]:match('@[%a%d_]+') then
+if MsgText[2]:match('@[%a%d_]+') then
+if redis:get(boss..'lock:karaa:'..msg.chat_id_) == 'off' then
+GetUserName(MsgText[2],function(msg,data)
+USERNAME = Flter_Markdown(msg.UserName)
+local NameUser = Hyper_Link_Name(data)
+local cmd = "q"
+UserID = data.id_
+MsgID = msg.MsgID
+ChatID = msg.ChatID
+if cmd == "q" then
+if UserID == our_id then 
+return sendMsg(ChatID,MsgID,"*•* مايمديك ترفعني! \n ") 
+elseif data.type_.ID == "UserTypeBot" then
+return sendMsg(ChatID,MsgID,"*•* مايمديك ترفع بوت! \n ") 
+elseif data.type_.ID == "ChannelChatInfo" then 
+end
+if redis:sismember(boss..':qq:'..ChatID,UserID) then 
+return SendMention(ChatID,UserID,MsgID,'• العضو 「 '..NameUser..' 」 \n• عسل من قبل \n ',17,USERCAR) 
+end
+redis:sadd(boss..':qq:'..ChatID,UserID)
+return SendMention(ChatID,UserID,MsgID,'• العضو 「 '..NameUser..' 」 \n• رفعته صار عسل \n ',17,USERCAR) 
+end
+
+
+end,{ChatID=msg.chat_id_,MsgID=msg.id_,UserName=MsgText[2]})
+
+
+end
+end
+if redis:get(boss..'lock:karaa:'..msg.chat_id_) == 'on' then  
+sendMsg(msg.chat_id_,msg.id_,"*•* اهلين عيني "..msg.TheRank.."\n*•* اوامر التسليه معطله\n ")
+end
+end
+
+if MsgText[1] == "رفع عسل" and msg.reply_id then
+if not MsgText[2] and msg.reply_id then
+if redis:get(boss..'lock:karaa:'..msg.chat_id_) == 'off' then
+--sendMsg(msg.chat_id_,msg.id_,"*•* أهلا عزيزي "..msg.TheRank.."\n*•* اوامر التسليه معطله\n ")
+GetMsgInfo(msg.chat_id_,msg.reply_id,action_by_reply,{msg=msg,cmd="q"})
+end
+end
+if redis:get(boss..'lock:karaa:'..msg.chat_id_) == 'on' then  
+sendMsg(msg.chat_id_,msg.id_,"*•* اهلين عيني "..msg.TheRank.."\n*•* اوامر التسليه معطله\n ")
+end
+return false
+end
+
+
+if MsgText[1] == "تنزيل عسل" and MsgText[2] and MsgText[2]:match('@[%a%d_]+') then
+if not msg.Rank then end
+if MsgText[2]:match('@[%a%d_]+') then
+if redis:get(boss..'lock:karaa:'..msg.chat_id_) == 'off' then
+GetUserName(MsgText[2],function(msg,data)
+local USERNAME = Flter_Markdown(msg.UserName)
+local NameUser   = Hyper_Link_Name(data)
+local cmd = "qqq"
+local UserID = data.id_
+local MsgID = msg.MsgID
+local ChatID = msg.ChatID
+if cmd == "qqq" then
+if not redis:sismember(boss..':qq:'..ChatID,UserID) then 
+return SendMention(ChatID,UserID,MsgID,'• العضو 「 '..NameUser..' 」 \n• مو عسل من قبل \n ',17,USERCAR) 
+end
+redis:srem(boss..':qq:'..ChatID,UserID)
+return SendMention(ChatID,UserID,MsgID,'• العضو 「 '..NameUser..' 」\n• نزلته من قائمة العسل \n ',17,USERCAR) 
+end
+
+
+end,{ChatID=msg.chat_id_,MsgID=msg.id_,UserName=MsgText[2]})
+
+
+end
+end
+if redis:get(boss..'lock:karaa:'..msg.chat_id_) == 'on' then  
+sendMsg(msg.chat_id_,msg.id_,"*•* اهلين عيني "..msg.TheRank.."\n*•* اوامر التسليه معطله\n ")
+end
+end
+
+if MsgText[1] == "تنزيل عسل" then
+if not msg.Rank then end
+if not MsgText[2] and msg.reply_id then
+GetMsgInfo(msg.chat_id_,msg.reply_id,action_by_reply,{msg=msg,cmd="qqq"})
+end
+return false
+end
+
+
+
+--======={ بقره }==========
+
+if MsgText[1] == "رفع بقره" and MsgText[2] and MsgText[2]:match('@[%a%d_]+') then
+if MsgText[2]:match('@[%a%d_]+') then
+if redis:get(boss..'lock:karaa:'..msg.chat_id_) == 'off' then
+GetUserName(MsgText[2],function(msg,data)
+USERNAME = Flter_Markdown(msg.UserName)
+local NameUser = Hyper_Link_Name(data)
+local cmd = "b"
+UserID = data.id_
+MsgID = msg.MsgID
+ChatID = msg.ChatID
+if cmd == "b" then
+if UserID == our_id then 
+return sendMsg(ChatID,MsgID,"*•* مايمديك ترفعني! \n ") 
+elseif data.type_.ID == "UserTypeBot" then
+return sendMsg(ChatID,MsgID,"*•* مايمديك ترفع بوت! \n ") 
+elseif data.type_.ID == "ChannelChatInfo" then 
+end
+if redis:sismember(boss..':bb:'..ChatID,UserID) then 
+return SendMention(ChatID,UserID,MsgID,'• العضو 「 '..NameUser..' 」 \n• بقره من قبل \n ',17,USERCAR) 
+end
+redis:sadd(boss..':bb:'..ChatID,UserID)
+return SendMention(ChatID,UserID,MsgID,'• العضو 「 '..NameUser..' 」 \n• رفعته صار بقره \n ',17,USERCAR) 
+end
+
+
+end,{ChatID=msg.chat_id_,MsgID=msg.id_,UserName=MsgText[2]})
+
+
+end
+end
+if redis:get(boss..'lock:karaa:'..msg.chat_id_) == 'on' then  
+sendMsg(msg.chat_id_,msg.id_,"*•* اهلين عيني "..msg.TheRank.."\n*•* اوامر التسليه معطله\n ")
+end
+end
+
+if MsgText[1] == "رفع بقره" and msg.reply_id then
+if not MsgText[2] and msg.reply_id then
+if redis:get(boss..'lock:karaa:'..msg.chat_id_) == 'off' then
+--sendMsg(msg.chat_id_,msg.id_,"*•* أهلا عزيزي "..msg.TheRank.."\n*•* اوامر التسليه معطله\n ")
+GetMsgInfo(msg.chat_id_,msg.reply_id,action_by_reply,{msg=msg,cmd="b"})
+end
+end
+if redis:get(boss..'lock:karaa:'..msg.chat_id_) == 'on' then  
+sendMsg(msg.chat_id_,msg.id_,"*•* اهلين عيني "..msg.TheRank.."\n*•* اوامر التسليه معطله\n ")
+end
+return false
+end
+
+
+if MsgText[1] == "تنزيل بقره" and MsgText[2] and MsgText[2]:match('@[%a%d_]+') then
+if not msg.Rank then end
+if MsgText[2]:match('@[%a%d_]+') then
+if redis:get(boss..'lock:karaa:'..msg.chat_id_) == 'off' then
+GetUserName(MsgText[2],function(msg,data)
+local USERNAME = Flter_Markdown(msg.UserName)
+local NameUser   = Hyper_Link_Name(data)
+local cmd = "bbb"
+local UserID = data.id_
+local MsgID = msg.MsgID
+local ChatID = msg.ChatID
+if cmd == "bbb" then
+if not redis:sismember(boss..':bb:'..ChatID,UserID) then 
+return SendMention(ChatID,UserID,MsgID,'• العضو 「 '..NameUser..' 」 \n• مو بقره من قبل \n ',17,USERCAR) 
+end
+redis:srem(boss..':bb:'..ChatID,UserID)
+return SendMention(ChatID,UserID,MsgID,'• العضو 「 '..NameUser..' 」\n• نزلته من قائمة البقر \n ',17,USERCAR) 
+end
+
+
+end,{ChatID=msg.chat_id_,MsgID=msg.id_,UserName=MsgText[2]})
+
+
+end
+end
+if redis:get(boss..'lock:karaa:'..msg.chat_id_) == 'on' then  
+sendMsg(msg.chat_id_,msg.id_,"*•* اهلين عيني "..msg.TheRank.."\n*•* اوامر التسليه معطله\n ")
+end
+end
+
+if MsgText[1] == "تنزيل بقره" then
+if not msg.Rank then end
+if not MsgText[2] and msg.reply_id then
+GetMsgInfo(msg.chat_id_,msg.reply_id,action_by_reply,{msg=msg,cmd="bbb"})
+end
+return false
+end
+
+--======={ كلب }==========
+
+if MsgText[1] == "رفع كلب" and MsgText[2] and MsgText[2]:match('@[%a%d_]+') then
+if MsgText[2]:match('@[%a%d_]+') then
+if redis:get(boss..'lock:karaa:'..msg.chat_id_) == 'off' then
+GetUserName(MsgText[2],function(msg,data)
+USERNAME = Flter_Markdown(msg.UserName)
+local NameUser = Hyper_Link_Name(data)
+local cmd = "l"
+UserID = data.id_
+MsgID = msg.MsgID
+ChatID = msg.ChatID
+if cmd == "l" then
+if UserID == our_id then 
+return sendMsg(ChatID,MsgID,"*•* مايمديك ترفعني! \n ") 
+elseif data.type_.ID == "UserTypeBot" then
+return sendMsg(ChatID,MsgID,"*•* مايمديك ترفع بوت! \n ") 
+elseif data.type_.ID == "ChannelChatInfo" then 
+end
+if redis:sismember(boss..':ll:'..ChatID,UserID) then 
+return SendMention(ChatID,UserID,MsgID,'• العضو 「 '..NameUser..' 」 \n• كلب من قبل \n ',17,USERCAR) 
+end
+redis:sadd(boss..':ll:'..ChatID,UserID)
+return SendMention(ChatID,UserID,MsgID,'• العضو 「 '..NameUser..' 」 \n• رفعته صار كلب \n ',17,USERCAR) 
+end
+
+
+end,{ChatID=msg.chat_id_,MsgID=msg.id_,UserName=MsgText[2]})
+
+
+end
+end
+if redis:get(boss..'lock:karaa:'..msg.chat_id_) == 'on' then  
+sendMsg(msg.chat_id_,msg.id_,"*•* اهلين عيني "..msg.TheRank.."\n*•* اوامر التسليه معطله\n ")
+end
+end
+
+if MsgText[1] == "رفع كلب" and msg.reply_id then
+if not MsgText[2] and msg.reply_id then
+if redis:get(boss..'lock:karaa:'..msg.chat_id_) == 'off' then
+--sendMsg(msg.chat_id_,msg.id_,"*•* أهلا عزيزي "..msg.TheRank.."\n*•* اوامر التسليه معطله\n ")
+GetMsgInfo(msg.chat_id_,msg.reply_id,action_by_reply,{msg=msg,cmd="l"})
+end
+end
+if redis:get(boss..'lock:karaa:'..msg.chat_id_) == 'on' then  
+sendMsg(msg.chat_id_,msg.id_,"*•* اهلين عيني "..msg.TheRank.."\n*•* اوامر التسليه معطله\n ")
+end
+return false
+end
+
+
+if MsgText[1] == "تنزيل كلب" and MsgText[2] and MsgText[2]:match('@[%a%d_]+') then
+if not msg.Rank then end
+if MsgText[2]:match('@[%a%d_]+') then
+if redis:get(boss..'lock:karaa:'..msg.chat_id_) == 'off' then
+GetUserName(MsgText[2],function(msg,data)
+local USERNAME = Flter_Markdown(msg.UserName)
+local NameUser   = Hyper_Link_Name(data)
+local cmd = "lll"
+local UserID = data.id_
+local MsgID = msg.MsgID
+local ChatID = msg.ChatID
+if cmd == "lll" then
+if not redis:sismember(boss..':ll:'..ChatID,UserID) then 
+return SendMention(ChatID,UserID,MsgID,'• العضو 「 '..NameUser..' 」 \n• مو كلب من قبل \n ',17,USERCAR) 
+end
+redis:srem(boss..':ll:'..ChatID,UserID)
+return SendMention(ChatID,UserID,MsgID,'• العضو 「 '..NameUser..' 」\n• نزلته من قائمة الكلاب \n ',17,USERCAR) 
+end
+
+
+end,{ChatID=msg.chat_id_,MsgID=msg.id_,UserName=MsgText[2]})
+
+
+end
+end
+if redis:get(boss..'lock:karaa:'..msg.chat_id_) == 'on' then  
+sendMsg(msg.chat_id_,msg.id_,"*•* اهلين عيني "..msg.TheRank.."\n*•* اوامر التسليه معطله\n ")
+end
+end
+
+if MsgText[1] == "تنزيل كلب" then
+if not msg.Rank then end
+if not MsgText[2] and msg.reply_id then
+GetMsgInfo(msg.chat_id_,msg.reply_id,action_by_reply,{msg=msg,cmd="lll"})
+end
+return false
+end
+
+
+--======={ قرد }==========
+
+
+if MsgText[1] == "رفع قرد" and MsgText[2] and MsgText[2]:match('@[%a%d_]+') then
+if MsgText[2]:match('@[%a%d_]+') then
+if redis:get(boss..'lock:karaa:'..msg.chat_id_) == 'off' then
+GetUserName(MsgText[2],function(msg,data)
+USERNAME = Flter_Markdown(msg.UserName)
+local NameUser = Hyper_Link_Name(data)
+local cmd = "g"
+UserID = data.id_
+MsgID = msg.MsgID
+ChatID = msg.ChatID
+if cmd == "g" then
+if UserID == our_id then 
+return sendMsg(ChatID,MsgID,"*•* مايمديك ترفعني! \n ") 
+elseif data.type_.ID == "UserTypeBot" then
+return sendMsg(ChatID,MsgID,"*•* مايمديك ترفع بوت! \n ") 
+elseif data.type_.ID == "ChannelChatInfo" then 
+end
+if redis:sismember(boss..':gg:'..ChatID,UserID) then 
+return SendMention(ChatID,UserID,MsgID,'• العضو 「 '..NameUser..' 」 \n• قرد من قبل \n ',17,USERCAR) 
+end
+redis:sadd(boss..':gg:'..ChatID,UserID)
+return SendMention(ChatID,UserID,MsgID,'• العضو 「 '..NameUser..' 」 \n• رفعته صار قرد \n ',17,USERCAR) 
+end
+
+
+end,{ChatID=msg.chat_id_,MsgID=msg.id_,UserName=MsgText[2]})
+
+
+end
+end
+if redis:get(boss..'lock:karaa:'..msg.chat_id_) == 'on' then  
+sendMsg(msg.chat_id_,msg.id_,"*•* اهلين عيني "..msg.TheRank.."\n*•* اوامر التسليه معطله\n ")
+end
+end
+
+if MsgText[1] == "رفع قرد" and msg.reply_id then
+if not MsgText[2] and msg.reply_id then
+if redis:get(boss..'lock:karaa:'..msg.chat_id_) == 'off' then
+--sendMsg(msg.chat_id_,msg.id_,"*•* أهلا عزيزي "..msg.TheRank.."\n*•* اوامر التسليه معطله\n ")
+GetMsgInfo(msg.chat_id_,msg.reply_id,action_by_reply,{msg=msg,cmd="g"})
+end
+end
+if redis:get(boss..'lock:karaa:'..msg.chat_id_) == 'on' then  
+sendMsg(msg.chat_id_,msg.id_,"*•* اهلين عيني "..msg.TheRank.."\n*•* اوامر التسليه معطله\n ")
+end
+return false
+end
+
+
+if MsgText[1] == "تنزيل قرد" and MsgText[2] and MsgText[2]:match('@[%a%d_]+') then
+if not msg.Rank then end
+if MsgText[2]:match('@[%a%d_]+') then
+if redis:get(boss..'lock:karaa:'..msg.chat_id_) == 'off' then
+GetUserName(MsgText[2],function(msg,data)
+local USERNAME = Flter_Markdown(msg.UserName)
+local NameUser   = Hyper_Link_Name(data)
+local cmd = "ggg"
+local UserID = data.id_
+local MsgID = msg.MsgID
+local ChatID = msg.ChatID
+if cmd == "ggg" then
+if not redis:sismember(boss..':gg:'..ChatID,UserID) then 
+return SendMention(ChatID,UserID,MsgID,'• العضو 「 '..NameUser..' 」 \n• مو قرد من قبل \n ',17,USERCAR) 
+end
+redis:srem(boss..':gg:'..ChatID,UserID)
+return SendMention(ChatID,UserID,MsgID,'• العضو 「 '..NameUser..' 」\n• نزلته من قائمة القرود \n ',17,USERCAR) 
+end
+
+
+end,{ChatID=msg.chat_id_,MsgID=msg.id_,UserName=MsgText[2]})
+
+
+end
+end
+if redis:get(boss..'lock:karaa:'..msg.chat_id_) == 'on' then  
+sendMsg(msg.chat_id_,msg.id_,"*•* اهلين عيني "..msg.TheRank.."\n*•* اوامر التسليه معطله\n ")
+end
+end
+
+if MsgText[1] == "تنزيل قرد" then
+if not msg.Rank then end
+if not MsgText[2] and msg.reply_id then
+GetMsgInfo(msg.chat_id_,msg.reply_id,action_by_reply,{msg=msg,cmd="ggg"})
+end
+return false
+end
+
+
+--======={ تيس }==========
+
+
+if MsgText[1] == "رفع تيس" and MsgText[2] and MsgText[2]:match('@[%a%d_]+') then
+if MsgText[2]:match('@[%a%d_]+') then
+if redis:get(boss..'lock:karaa:'..msg.chat_id_) == 'off' then
+GetUserName(MsgText[2],function(msg,data)
+USERNAME = Flter_Markdown(msg.UserName)
+local NameUser = Hyper_Link_Name(data)
+local cmd = "t"
+UserID = data.id_
+MsgID = msg.MsgID
+ChatID = msg.ChatID
+if cmd == "t" then
+if UserID == our_id then 
+return sendMsg(ChatID,MsgID,"*•* مايمديك ترفعني! \n ") 
+elseif data.type_.ID == "UserTypeBot" then
+return sendMsg(ChatID,MsgID,"*•* مايمديك ترفع بوت! \n ") 
+elseif data.type_.ID == "ChannelChatInfo" then 
+end
+if redis:sismember(boss..':tt:'..ChatID,UserID) then 
+return SendMention(ChatID,UserID,MsgID,'• العضو 「 '..NameUser..' 」 \n• تيس من قبل \n ',17,USERCAR) 
+end
+redis:sadd(boss..':tt:'..ChatID,UserID)
+return SendMention(ChatID,UserID,MsgID,'• العضو 「 '..NameUser..' 」 \n• رفعته صار تيس \n ',17,USERCAR) 
+end
+
+
+end,{ChatID=msg.chat_id_,MsgID=msg.id_,UserName=MsgText[2]})
+
+
+end
+end
+if redis:get(boss..'lock:karaa:'..msg.chat_id_) == 'on' then  
+sendMsg(msg.chat_id_,msg.id_,"*•* اهلين عيني "..msg.TheRank.."\n*•* اوامر التسليه معطله\n ")
+end
+end
+
+if MsgText[1] == "رفع تيس" and msg.reply_id then
+if not MsgText[2] and msg.reply_id then
+if redis:get(boss..'lock:karaa:'..msg.chat_id_) == 'off' then
+--sendMsg(msg.chat_id_,msg.id_,"*•* أهلا عزيزي "..msg.TheRank.."\n*•* اوامر التسليه معطله\n ")
+GetMsgInfo(msg.chat_id_,msg.reply_id,action_by_reply,{msg=msg,cmd="t"})
+end
+end
+if redis:get(boss..'lock:karaa:'..msg.chat_id_) == 'on' then  
+sendMsg(msg.chat_id_,msg.id_,"*•* اهلين عيني "..msg.TheRank.."\n*•* اوامر التسليه معطله\n ")
+end
+return false
+end
+
+
+if MsgText[1] == "تنزيل تيس" and MsgText[2] and MsgText[2]:match('@[%a%d_]+') then
+if not msg.Rank then end
+if MsgText[2]:match('@[%a%d_]+') then
+if redis:get(boss..'lock:karaa:'..msg.chat_id_) == 'off' then
+GetUserName(MsgText[2],function(msg,data)
+local USERNAME = Flter_Markdown(msg.UserName)
+local NameUser   = Hyper_Link_Name(data)
+local cmd = "ttt"
+local UserID = data.id_
+local MsgID = msg.MsgID
+local ChatID = msg.ChatID
+if cmd == "ttt" then
+if not redis:sismember(boss..':tt:'..ChatID,UserID) then 
+return SendMention(ChatID,UserID,MsgID,'• العضو 「 '..NameUser..' 」 \n• مو تيس من قبل \n ',17,USERCAR) 
+end
+redis:srem(boss..':tt:'..ChatID,UserID)
+return SendMention(ChatID,UserID,MsgID,'• العضو 「 '..NameUser..' 」\n• نزلته من قائمة التيوس \n ',17,USERCAR) 
+end
+
+
+end,{ChatID=msg.chat_id_,MsgID=msg.id_,UserName=MsgText[2]})
+
+
+end
+end
+if redis:get(boss..'lock:karaa:'..msg.chat_id_) == 'on' then  
+sendMsg(msg.chat_id_,msg.id_,"*•* اهلين عيني "..msg.TheRank.."\n*•* اوامر التسليه معطله\n ")
+end
+end
+
+if MsgText[1] == "تنزيل تيس" then
+if not msg.Rank then end
+if not MsgText[2] and msg.reply_id then
+GetMsgInfo(msg.chat_id_,msg.reply_id,action_by_reply,{msg=msg,cmd="ttt"})
+end
+return false
+end
+
+
+--======={ ثور }==========
+
+
+if MsgText[1] == "رفع ثور" and MsgText[2] and MsgText[2]:match('@[%a%d_]+') then
+if MsgText[2]:match('@[%a%d_]+') then
+if redis:get(boss..'lock:karaa:'..msg.chat_id_) == 'off' then
+GetUserName(MsgText[2],function(msg,data)
+USERNAME = Flter_Markdown(msg.UserName)
+local NameUser = Hyper_Link_Name(data)
+local cmd = "f"
+UserID = data.id_
+MsgID = msg.MsgID
+ChatID = msg.ChatID
+if cmd == "f" then
+if UserID == our_id then 
+return sendMsg(ChatID,MsgID,"*•* مايمديك ترفعني! \n ") 
+elseif data.type_.ID == "UserTypeBot" then
+return sendMsg(ChatID,MsgID,"*•* مايمديك ترفع بوت! \n ") 
+elseif data.type_.ID == "ChannelChatInfo" then 
+end
+if redis:sismember(boss..':ff:'..ChatID,UserID) then 
+return SendMention(ChatID,UserID,MsgID,'• العضو 「 '..NameUser..' 」 \n• ثور من قبل \n ',17,USERCAR) 
+end
+redis:sadd(boss..':ff:'..ChatID,UserID)
+return SendMention(ChatID,UserID,MsgID,'• العضو 「 '..NameUser..' 」 \n• رفعته صار ثور \n ',17,USERCAR) 
+end
+
+
+end,{ChatID=msg.chat_id_,MsgID=msg.id_,UserName=MsgText[2]})
+
+
+end
+end
+if redis:get(boss..'lock:karaa:'..msg.chat_id_) == 'on' then  
+sendMsg(msg.chat_id_,msg.id_,"*•* اهلين عيني "..msg.TheRank.."\n*•* اوامر التسليه معطله\n ")
+end
+end
+
+if MsgText[1] == "رفع ثور" and msg.reply_id then
+if not MsgText[2] and msg.reply_id then
+if redis:get(boss..'lock:karaa:'..msg.chat_id_) == 'off' then
+--sendMsg(msg.chat_id_,msg.id_,"*•* أهلا عزيزي "..msg.TheRank.."\n*•* اوامر التسليه معطله\n ")
+GetMsgInfo(msg.chat_id_,msg.reply_id,action_by_reply,{msg=msg,cmd="f"})
+end
+end
+if redis:get(boss..'lock:karaa:'..msg.chat_id_) == 'on' then  
+sendMsg(msg.chat_id_,msg.id_,"*•* اهلين عيني "..msg.TheRank.."\n*•* اوامر التسليه معطله\n ")
+end
+return false
+end
+
+
+if MsgText[1] == "تنزيل ثور" and MsgText[2] and MsgText[2]:match('@[%a%d_]+') then
+if not msg.Rank then end
+if MsgText[2]:match('@[%a%d_]+') then
+if redis:get(boss..'lock:karaa:'..msg.chat_id_) == 'off' then
+GetUserName(MsgText[2],function(msg,data)
+local USERNAME = Flter_Markdown(msg.UserName)
+local NameUser   = Hyper_Link_Name(data)
+local cmd = "fff"
+local UserID = data.id_
+local MsgID = msg.MsgID
+local ChatID = msg.ChatID
+if cmd == "fff" then
+if not redis:sismember(boss..':ff:'..ChatID,UserID) then 
+return SendMention(ChatID,UserID,MsgID,'• العضو 「 '..NameUser..' 」 \n• مو ثور من قبل \n ',17,USERCAR) 
+end
+redis:srem(boss..':ff:'..ChatID,UserID)
+return SendMention(ChatID,UserID,MsgID,'• العضو 「 '..NameUser..' 」\n• نزلته من قائمة الثيران \n ',17,USERCAR) 
+end
+
+
+end,{ChatID=msg.chat_id_,MsgID=msg.id_,UserName=MsgText[2]})
+
+
+end
+end
+if redis:get(boss..'lock:karaa:'..msg.chat_id_) == 'on' then  
+sendMsg(msg.chat_id_,msg.id_,"*•* اهلين عيني "..msg.TheRank.."\n*•* اوامر التسليه معطله\n ")
+end
+end
+
+if MsgText[1] == "تنزيل ثور" then
+if not msg.Rank then end
+if not MsgText[2] and msg.reply_id then
+GetMsgInfo(msg.chat_id_,msg.reply_id,action_by_reply,{msg=msg,cmd="fff"})
+end
+return false
+end
+
+
+--======={ باعوص }==========
+
+if MsgText[1] == "رفع باعوص" and MsgText[2] and MsgText[2]:match('@[%a%d_]+') then
+if MsgText[2]:match('@[%a%d_]+') then
+if redis:get(boss..'lock:karaa:'..msg.chat_id_) == 'off' then
+GetUserName(MsgText[2],function(msg,data)
+USERNAME = Flter_Markdown(msg.UserName)
+local NameUser = Hyper_Link_Name(data)
+local cmd = "c"
+UserID = data.id_
+MsgID = msg.MsgID
+ChatID = msg.ChatID
+if cmd == "c" then
+if UserID == our_id then 
+return sendMsg(ChatID,MsgID,"*•* مايمديك ترفعني! \n ") 
+elseif data.type_.ID == "UserTypeBot" then
+return sendMsg(ChatID,MsgID,"*•* مايمديك ترفع بوت! \n ") 
+elseif data.type_.ID == "ChannelChatInfo" then 
+end
+if redis:sismember(boss..':cc:'..ChatID,UserID) then 
+return SendMention(ChatID,UserID,MsgID,'• العضو 「 '..NameUser..' 」 \n• باعوص من قبل \n ',17,USERCAR) 
+end
+redis:sadd(boss..':cc:'..ChatID,UserID)
+return SendMention(ChatID,UserID,MsgID,'• العضو 「 '..NameUser..' 」 \n• رفعته صار باعوص \n ',17,USERCAR) 
+end
+
+
+end,{ChatID=msg.chat_id_,MsgID=msg.id_,UserName=MsgText[2]})
+
+
+end
+end
+if redis:get(boss..'lock:karaa:'..msg.chat_id_) == 'on' then  
+sendMsg(msg.chat_id_,msg.id_,"*•* اهلين عيني "..msg.TheRank.."\n*•* اوامر التسليه معطله\n ")
+end
+end
+
+if MsgText[1] == "رفع باعوص" and msg.reply_id then
+if not MsgText[2] and msg.reply_id then
+if redis:get(boss..'lock:karaa:'..msg.chat_id_) == 'off' then
+--sendMsg(msg.chat_id_,msg.id_,"*•* أهلا عزيزي "..msg.TheRank.."\n*•* اوامر التسليه معطله\n ")
+GetMsgInfo(msg.chat_id_,msg.reply_id,action_by_reply,{msg=msg,cmd="c"})
+end
+end
+if redis:get(boss..'lock:karaa:'..msg.chat_id_) == 'on' then  
+sendMsg(msg.chat_id_,msg.id_,"*•* اهلين عيني "..msg.TheRank.."\n*•* اوامر التسليه معطله\n ")
+end
+return false
+end
+
+
+if MsgText[1] == "تنزيل باعوص" and MsgText[2] and MsgText[2]:match('@[%a%d_]+') then
+if not msg.Rank then end
+if MsgText[2]:match('@[%a%d_]+') then
+if redis:get(boss..'lock:karaa:'..msg.chat_id_) == 'off' then
+GetUserName(MsgText[2],function(msg,data)
+local USERNAME = Flter_Markdown(msg.UserName)
+local NameUser   = Hyper_Link_Name(data)
+local cmd = "ccc"
+local UserID = data.id_
+local MsgID = msg.MsgID
+local ChatID = msg.ChatID
+if cmd == "ccc" then
+if not redis:sismember(boss..':cc:'..ChatID,UserID) then 
+return SendMention(ChatID,UserID,MsgID,'• العضو 「 '..NameUser..' 」 \n• مو باعوص من قبل \n ',17,USERCAR) 
+end
+redis:srem(boss..':cc:'..ChatID,UserID)
+return SendMention(ChatID,UserID,MsgID,'• العضو 「 '..NameUser..' 」\n• نزلته من قائمة البواعيص \n ',17,USERCAR) 
+end
+
+
+end,{ChatID=msg.chat_id_,MsgID=msg.id_,UserName=MsgText[2]})
+
+
+end
+end
+if redis:get(boss..'lock:karaa:'..msg.chat_id_) == 'on' then  
+sendMsg(msg.chat_id_,msg.id_,"*•* اهلين عيني "..msg.TheRank.."\n*•* اوامر التسليه معطله\n ")
+end
+end
+
+if MsgText[1] == "تنزيل باعوص" then
+if not msg.Rank then end
+if not MsgText[2] and msg.reply_id then
+GetMsgInfo(msg.chat_id_,msg.reply_id,action_by_reply,{msg=msg,cmd="ccc"})
+end
+return false
+end
+
+
+
+--======={ دجاجه }==========
+
+if MsgText[1] == "رفع دجاجه" and MsgText[2] and MsgText[2]:match('@[%a%d_]+') then
+if MsgText[2]:match('@[%a%d_]+') then
+if redis:get(boss..'lock:karaa:'..msg.chat_id_) == 'off' then
+GetUserName(MsgText[2],function(msg,data)
+USERNAME = Flter_Markdown(msg.UserName)
+local NameUser = Hyper_Link_Name(data)
+local cmd = "d"
+UserID = data.id_
+MsgID = msg.MsgID
+ChatID = msg.ChatID
+if cmd == "d" then
+if UserID == our_id then 
+return sendMsg(ChatID,MsgID,"*•* مايمديك ترفعني! \n ") 
+elseif data.type_.ID == "UserTypeBot" then
+return sendMsg(ChatID,MsgID,"*•* مايمديك ترفع بوت! \n ") 
+elseif data.type_.ID == "ChannelChatInfo" then 
+end
+if redis:sismember(boss..':dd:'..ChatID,UserID) then 
+return SendMention(ChatID,UserID,MsgID,'• العضو 「 '..NameUser..' 」 \n• دجاجه من قبل \n ',17,USERCAR) 
+end
+redis:sadd(boss..':dd:'..ChatID,UserID)
+return SendMention(ChatID,UserID,MsgID,'• العضو 「 '..NameUser..' 」 \n• رفعته صار دجاجه \n ',17,USERCAR) 
+end
+
+
+end,{ChatID=msg.chat_id_,MsgID=msg.id_,UserName=MsgText[2]})
+
+
+end
+end
+if redis:get(boss..'lock:karaa:'..msg.chat_id_) == 'on' then  
+sendMsg(msg.chat_id_,msg.id_,"*•* اهلين عيني "..msg.TheRank.."\n*•* اوامر التسليه معطله\n ")
+end
+end
+
+if MsgText[1] == "رفع دجاجه" and msg.reply_id then
+if not MsgText[2] and msg.reply_id then
+if redis:get(boss..'lock:karaa:'..msg.chat_id_) == 'off' then
+--sendMsg(msg.chat_id_,msg.id_,"*•* أهلا عزيزي "..msg.TheRank.."\n*•* اوامر التسليه معطله\n ")
+GetMsgInfo(msg.chat_id_,msg.reply_id,action_by_reply,{msg=msg,cmd="d"})
+end
+end
+if redis:get(boss..'lock:karaa:'..msg.chat_id_) == 'on' then  
+sendMsg(msg.chat_id_,msg.id_,"*•* اهلين عيني "..msg.TheRank.."\n*•* اوامر التسليه معطله\n ")
+end
+return false
+end
+
+
+if MsgText[1] == "تنزيل دجاجه" and MsgText[2] and MsgText[2]:match('@[%a%d_]+') then
+if not msg.Rank then end
+if MsgText[2]:match('@[%a%d_]+') then
+if redis:get(boss..'lock:karaa:'..msg.chat_id_) == 'off' then
+GetUserName(MsgText[2],function(msg,data)
+local USERNAME = Flter_Markdown(msg.UserName)
+local NameUser   = Hyper_Link_Name(data)
+local cmd = "ddd"
+local UserID = data.id_
+local MsgID = msg.MsgID
+local ChatID = msg.ChatID
+if cmd == "ddd" then
+if not redis:sismember(boss..':dd:'..ChatID,UserID) then 
+return SendMention(ChatID,UserID,MsgID,'• العضو 「 '..NameUser..' 」 \n• مو دجاجه من قبل \n ',17,USERCAR) 
+end
+redis:srem(boss..':dd:'..ChatID,UserID)
+return SendMention(ChatID,UserID,MsgID,'• العضو 「 '..NameUser..' 」\n• نزلته من قائمة الدجاج \n ',17,USERCAR) 
+end
+
+
+end,{ChatID=msg.chat_id_,MsgID=msg.id_,UserName=MsgText[2]})
+
+
+end
+end
+if redis:get(boss..'lock:karaa:'..msg.chat_id_) == 'on' then  
+sendMsg(msg.chat_id_,msg.id_,"*•* اهلين عيني "..msg.TheRank.."\n*•* اوامر التسليه معطله\n ")
+end
+end
+
+if MsgText[1] == "تنزيل دجاجه" then
+if not msg.Rank then end
+if not MsgText[2] and msg.reply_id then
+GetMsgInfo(msg.chat_id_,msg.reply_id,action_by_reply,{msg=msg,cmd="ddd"})
+end
+return false
+end
+
+
+--======={ هطف }==========
+
+
+if MsgText[1] == "رفع هطف" and MsgText[2] and MsgText[2]:match('@[%a%d_]+') then
+if MsgText[2]:match('@[%a%d_]+') then
+if redis:get(boss..'lock:karaa:'..msg.chat_id_) == 'off' then
+GetUserName(MsgText[2],function(msg,data)
+USERNAME = Flter_Markdown(msg.UserName)
+local NameUser = Hyper_Link_Name(data)
+local cmd = "a"
+UserID = data.id_
+MsgID = msg.MsgID
+ChatID = msg.ChatID
+if cmd == "a" then
+if UserID == our_id then 
+return sendMsg(ChatID,MsgID,"*•* مايمديك ترفعني! \n ") 
+elseif data.type_.ID == "UserTypeBot" then
+return sendMsg(ChatID,MsgID,"*•* مايمديك ترفع بوت! \n ") 
+elseif data.type_.ID == "ChannelChatInfo" then 
+end
+if redis:sismember(boss..':aa:'..ChatID,UserID) then 
+return SendMention(ChatID,UserID,MsgID,'• العضو 「 '..NameUser..' 」 \n• هطف من قبل \n ',17,USERCAR) 
+end
+redis:sadd(boss..':aa:'..ChatID,UserID)
+return SendMention(ChatID,UserID,MsgID,'• العضو 「 '..NameUser..' 」 \n• رفعته صار هطف \n ',17,USERCAR) 
+end
+
+
+end,{ChatID=msg.chat_id_,MsgID=msg.id_,UserName=MsgText[2]})
+
+
+end
+end
+if redis:get(boss..'lock:karaa:'..msg.chat_id_) == 'on' then  
+sendMsg(msg.chat_id_,msg.id_,"*•* اهلين عيني "..msg.TheRank.."\n*•* اوامر التسليه معطله\n ")
+end
+end
+
+if MsgText[1] == "رفع هطف" and msg.reply_id then
+if not MsgText[2] and msg.reply_id then
+if redis:get(boss..'lock:karaa:'..msg.chat_id_) == 'off' then
+--sendMsg(msg.chat_id_,msg.id_,"*•* أهلا عزيزي "..msg.TheRank.."\n*•* اوامر التسليه معطله\n ")
+GetMsgInfo(msg.chat_id_,msg.reply_id,action_by_reply,{msg=msg,cmd="a"})
+end
+end
+if redis:get(boss..'lock:karaa:'..msg.chat_id_) == 'on' then  
+sendMsg(msg.chat_id_,msg.id_,"*•* اهلين عيني "..msg.TheRank.."\n*•* اوامر التسليه معطله\n ")
+end
+return false
+end
+
+
+if MsgText[1] == "تنزيل هطف" and MsgText[2] and MsgText[2]:match('@[%a%d_]+') then
+if not msg.Rank then end
+if MsgText[2]:match('@[%a%d_]+') then
+if redis:get(boss..'lock:karaa:'..msg.chat_id_) == 'off' then
+GetUserName(MsgText[2],function(msg,data)
+local USERNAME = Flter_Markdown(msg.UserName)
+local NameUser   = Hyper_Link_Name(data)
+local cmd = "aaa"
+local UserID = data.id_
+local MsgID = msg.MsgID
+local ChatID = msg.ChatID
+if cmd == "aaa" then
+if not redis:sismember(boss..':aa:'..ChatID,UserID) then 
+return SendMention(ChatID,UserID,MsgID,'• العضو 「 '..NameUser..' 」 \n• مو هطف من قبل \n ',17,USERCAR) 
+end
+redis:srem(boss..':aa:'..ChatID,UserID)
+return SendMention(ChatID,UserID,MsgID,'• العضو 「 '..NameUser..' 」\n• نزلته من قائمة الهطوف \n ',17,USERCAR) 
+end
+
+
+end,{ChatID=msg.chat_id_,MsgID=msg.id_,UserName=MsgText[2]})
+
+
+end
+end
+if redis:get(boss..'lock:karaa:'..msg.chat_id_) == 'on' then  
+sendMsg(msg.chat_id_,msg.id_,"*•* اهلين عيني "..msg.TheRank.."\n*•* اوامر التسليه معطله\n ")
+end
+end
+
+if MsgText[1] == "تنزيل هطف" then
+if not msg.Rank then end
+if not MsgText[2] and msg.reply_id then
+GetMsgInfo(msg.chat_id_,msg.reply_id,action_by_reply,{msg=msg,cmd="aaa"})
+end
+return false
+end
+
+
+--======={ صياد }==========
+
+if MsgText[1] == "رفع صياد" or MsgText[1] == "رفع صياده" then
+if  MsgText[2] and MsgText[2]:match('@[%a%d_]+') then
+if MsgText[2]:match('@[%a%d_]+') then
+if redis:get(boss..'lock:karaa:'..msg.chat_id_) == 'off' then
+GetUserName(MsgText[2],function(msg,data)
+USERNAME = Flter_Markdown(msg.UserName)
+local NameUser = Hyper_Link_Name(data)
+local cmd = "m"
+UserID = data.id_
+MsgID = msg.MsgID
+ChatID = msg.ChatID
+if cmd == "m" then
+if UserID == our_id then 
+return sendMsg(ChatID,MsgID,"*•* مايمديك ترفعني! \n ") 
+elseif data.type_.ID == "UserTypeBot" then
+return sendMsg(ChatID,MsgID,"*•* مايمديك ترفع بوت! \n ") 
+elseif data.type_.ID == "ChannelChatInfo" then 
+end
+if redis:sismember(boss..':mm:'..ChatID,UserID) then 
+return SendMention(ChatID,UserID,MsgID,'• العضو 「 '..NameUser..' 」 \n• صياد من قبل \n ',17,USERCAR) 
+end
+redis:sadd(boss..':mm:'..ChatID,UserID)
+return SendMention(ChatID,UserID,MsgID,'• العضو 「 '..NameUser..' 」 \n• رفعته صار صياد \n ',17,USERCAR) 
+end
+
+
+end,{ChatID=msg.chat_id_,MsgID=msg.id_,UserName=MsgText[2]})
+
+
+end
+end
+if redis:get(boss..'lock:karaa:'..msg.chat_id_) == 'on' then  
+sendMsg(msg.chat_id_,msg.id_,"*•* اهلين عيني "..msg.TheRank.."\n*•* اوامر التسليه معطله\n ")
+end
+end
+end
+
+if MsgText[1] == "رفع صياد" or MsgText[1] == "رفع صياده" then
+if msg.reply_id then
+if not MsgText[2] and msg.reply_id then
+if redis:get(boss..'lock:karaa:'..msg.chat_id_) == 'off' then
+--sendMsg(msg.chat_id_,msg.id_,"*•* أهلا عزيزي "..msg.TheRank.."\n*•* اوامر التسليه معطله\n ")
+GetMsgInfo(msg.chat_id_,msg.reply_id,action_by_reply,{msg=msg,cmd="m"})
+end
+end
+if redis:get(boss..'lock:karaa:'..msg.chat_id_) == 'on' then  
+sendMsg(msg.chat_id_,msg.id_,"*•* اهلين عيني "..msg.TheRank.."\n*•* اوامر التسليه معطله\n ")
+end
+return false
+end
+end
+
+if MsgText[1] == "تنزيل صياد" or MsgText[1] == "تنزيل صياده" then  
+if MsgText[2] and MsgText[2]:match('@[%a%d_]+') then
+if not msg.Rank then end
+if MsgText[2]:match('@[%a%d_]+') then
+if redis:get(boss..'lock:karaa:'..msg.chat_id_) == 'off' then
+GetUserName(MsgText[2],function(msg,data)
+local USERNAME = Flter_Markdown(msg.UserName)
+local NameUser   = Hyper_Link_Name(data)
+local cmd = "mmm"
+local UserID = data.id_
+local MsgID = msg.MsgID
+local ChatID = msg.ChatID
+if cmd == "mmm" then
+if not redis:sismember(boss..':mm:'..ChatID,UserID) then 
+return SendMention(ChatID,UserID,MsgID,'• العضو 「 '..NameUser..' 」 \n• مو صياد من قبل \n ',17,USERCAR) 
+end
+redis:srem(boss..':mm:'..ChatID,UserID)
+return SendMention(ChatID,UserID,MsgID,'• العضو 「 '..NameUser..' 」\n• نزلته من قائمة الصيادين \n ',17,USERCAR) 
+end
+
+
+end,{ChatID=msg.chat_id_,MsgID=msg.id_,UserName=MsgText[2]})
+
+
+end
+end
+if redis:get(boss..'lock:karaa:'..msg.chat_id_) == 'on' then  
+sendMsg(msg.chat_id_,msg.id_,"*•* اهلين عيني "..msg.TheRank.."\n*•* اوامر التسليه معطله\n ")
+end
+end
+end
+
+if MsgText[1] == "تنزيل صياد" or MsgText[1] == "تنزيل صياده" then
+if not msg.Rank then end
+if not MsgText[2] and msg.reply_id then
+GetMsgInfo(msg.chat_id_,msg.reply_id,action_by_reply,{msg=msg,cmd="mmm"})
+end
+return false
+end
+
+
+--======={ خاروف }==========
+
+
+if MsgText[1] == "رفع خاروف" or MsgText[1] == "رفع خاروفه" then
+if  MsgText[2] and MsgText[2]:match('@[%a%d_]+') then
+if MsgText[2]:match('@[%a%d_]+') then
+if redis:get(boss..'lock:karaa:'..msg.chat_id_) == 'off' then
+GetUserName(MsgText[2],function(msg,data)
+USERNAME = Flter_Markdown(msg.UserName)
+local NameUser = Hyper_Link_Name(data)
+local cmd = "r"
+UserID = data.id_
+MsgID = msg.MsgID
+ChatID = msg.ChatID
+if cmd == "r" then
+if UserID == our_id then 
+return sendMsg(ChatID,MsgID,"*•* مايمديك ترفعني! \n ") 
+elseif data.type_.ID == "UserTypeBot" then
+return sendMsg(ChatID,MsgID,"*•* مايمديك ترفع بوت! \n ") 
+elseif data.type_.ID == "ChannelChatInfo" then 
+end
+if redis:sismember(boss..':rr:'..ChatID,UserID) then 
+return SendMention(ChatID,UserID,MsgID,'• العضو 「 '..NameUser..' 」 \n• خاروف من قبل \n ',17,USERCAR) 
+end
+redis:sadd(boss..':rr:'..ChatID,UserID)
+return SendMention(ChatID,UserID,MsgID,'• العضو 「 '..NameUser..' 」 \n• رفعته صار خاروف \n ',17,USERCAR) 
+end
+
+
+end,{ChatID=msg.chat_id_,MsgID=msg.id_,UserName=MsgText[2]})
+
+
+end
+end
+if redis:get(boss..'lock:karaa:'..msg.chat_id_) == 'on' then  
+sendMsg(msg.chat_id_,msg.id_,"*•* اهلين عيني "..msg.TheRank.."\n*•* اوامر التسليه معطله\n ")
+end
+end
+end
+
+if MsgText[1] == "رفع خاروف" or MsgText[1] == "رفع خاروفه" then
+if msg.reply_id then
+if not MsgText[2] and msg.reply_id then
+if redis:get(boss..'lock:karaa:'..msg.chat_id_) == 'off' then
+--sendMsg(msg.chat_id_,msg.id_,"*•* أهلا عزيزي "..msg.TheRank.."\n*•* اوامر التسليه معطله\n ")
+GetMsgInfo(msg.chat_id_,msg.reply_id,action_by_reply,{msg=msg,cmd="r"})
+end
+end
+if redis:get(boss..'lock:karaa:'..msg.chat_id_) == 'on' then  
+sendMsg(msg.chat_id_,msg.id_,"*•* اهلين عيني "..msg.TheRank.."\n*•* اوامر التسليه معطله\n ")
+end
+return false
+end
+end
+
+if MsgText[1] == "تنزيل خاروف" or MsgText[1] == "تنزيل خاروفه" then  
+if MsgText[2] and MsgText[2]:match('@[%a%d_]+') then
+if not msg.Rank then end
+if MsgText[2]:match('@[%a%d_]+') then
+if redis:get(boss..'lock:karaa:'..msg.chat_id_) == 'off' then
+GetUserName(MsgText[2],function(msg,data)
+local USERNAME = Flter_Markdown(msg.UserName)
+local NameUser   = Hyper_Link_Name(data)
+local cmd = "rrr"
+local UserID = data.id_
+local MsgID = msg.MsgID
+local ChatID = msg.ChatID
+if cmd == "rrr" then
+if not redis:sismember(boss..':rr:'..ChatID,UserID) then 
+return SendMention(ChatID,UserID,MsgID,'• العضو 「 '..NameUser..' 」 \n• مو خاروف من قبل \n ',17,USERCAR) 
+end
+redis:srem(boss..':rr:'..ChatID,UserID)
+return SendMention(ChatID,UserID,MsgID,'• العضو 「 '..NameUser..' 」\n• نزلته من قائمة الخرفان \n ',17,USERCAR) 
+end
+
+
+end,{ChatID=msg.chat_id_,MsgID=msg.id_,UserName=MsgText[2]})
+
+
+end
+end
+if redis:get(boss..'lock:karaa:'..msg.chat_id_) == 'on' then  
+sendMsg(msg.chat_id_,msg.id_,"*•* اهلين عيني "..msg.TheRank.."\n*•* اوامر التسليه معطله\n ")
+end
+end
+end
+
+if MsgText[1] == "تنزيل خاروف" or MsgText[1] == "تنزيل خاروفه" then
+if not msg.Rank then end
+if not MsgText[2] and msg.reply_id then
+GetMsgInfo(msg.chat_id_,msg.reply_id,action_by_reply,{msg=msg,cmd="rrr"})
+end
+return false
+end
+
+--====================={ end of rf3 }======================
+
+
+
+--====================={ start of list }===================
+
+--======={ زق }==========
+
+if MsgText[1] == "قائمة الزق" or MsgText[1] == "قائمة الزقان" then 
+if not msg.Rank then end
+return ZZZZ(msg) 
+end
+
+
+if MsgText[2] == "قائمة الزق" or MsgText[2] == "قائمة الزقان" then
+if not msg.Rank then end
+local NumMnsha = redis:scard(boss..':ZZ:'..msg.chat_id_)
+if NumMnsha ==0 then 
+return "*•* مافيه احد مرفوع في البوت عشان امسحه \n!" 
+end
+redis:del(boss..':ZZ:'..msg.chat_id_)
+return "*•*أهلا عيني "..msg.TheRankCmd.."   \n• مسحت ( * "..NumMnsha.." * ) من الزق \n "
+end
+
+
+--======={ كيك }==========
+
+if MsgText[1] == "قائمة الكيك" or MsgText[1] == "قائمة الكيكات" then 
+if not msg.Rank then end
+return kkkk(msg) 
+end
+
+
+if MsgText[2] == "قائمة الكيك" or MsgText[2] == "قائمة الكيكات" then
+if not msg.Rank then end
+local NumMnsha = redis:scard(boss..':kk:'..msg.chat_id_)
+if NumMnsha ==0 then 
+return "*•* مافيه احد مرفوع في البوت عشان امسحه \n!" 
+end
+redis:del(boss..':kk:'..msg.chat_id_)
+return "*•*أهلا عيني "..msg.TheRankCmd.."   \n• مسحت ( * "..NumMnsha.." * ) من الكيك \n "
+end
+
+
+--======={ حمار }==========
+
+if MsgText[1] == "قائمة الحمار" or MsgText[1] == "قائمة الحمير" then 
+if not msg.Rank then end
+return hhhh(msg) 
+end
+
+
+if MsgText[2] == "قائمة الحمار" or MsgText[2] == "قائمة الحمير" then
+if not msg.Rank then end
+local NumMnsha = redis:scard(boss..':hh:'..msg.chat_id_)
+if NumMnsha ==0 then 
+return "*•* مافيه احد مرفوع في البوت عشان امسحه \n!" 
+end
+redis:del(boss..':hh:'..msg.chat_id_)
+return "*•*أهلا عيني "..msg.TheRankCmd.."   \n• مسحت ( * "..NumMnsha.." * ) من الحمير \n "
+end
+
+
+--======={ عسل }==========
+
+if MsgText[1] == "قائمة العسل" then 
+if not msg.Rank then end
+return qqqq(msg) 
+end
+
+
+if MsgText[2] == "قائمة العسل" then
+if not msg.Rank then end
+local NumMnsha = redis:scard(boss..':qq:'..msg.chat_id_)
+if NumMnsha ==0 then 
+return "*•* مافيه احد مرفوع في البوت عشان امسحه \n!" 
+end
+redis:del(boss..':qq:'..msg.chat_id_)
+return "*•*أهلا عيني "..msg.TheRankCmd.."   \n• مسحت ( * "..NumMnsha.." * ) من العسل \n "
+end
+
+
+--======={ بقره }==========
+
+if MsgText[1] == "قائمة البقر" then 
+if not msg.Rank then end
+return bbbb(msg) 
+end
+
+
+if MsgText[2] == "قائمة البقر" then
+if not msg.Rank then end
+local NumMnsha = redis:scard(boss..':bb:'..msg.chat_id_)
+if NumMnsha ==0 then 
+return "*•* مافيه احد مرفوع في البوت عشان امسحه \n!" 
+end
+redis:del(boss..':bb:'..msg.chat_id_)
+return "*•*أهلا عيني "..msg.TheRankCmd.."   \n• مسحت ( * "..NumMnsha.." * ) من البقر \n "
+end
+
+
+--======={ كلب }==========
+
+
+if MsgText[1] == "قائمة الكلاب" or MsgText[1] == "قائمة الكلب" then 
+if not msg.Rank then end
+return llll(msg) 
+end
+
+
+if MsgText[2] == "قائمة الكلاب" or MsgText[2] == "قائمة الكلب" then
+if not msg.Rank then end
+local NumMnsha = redis:scard(boss..':ll:'..msg.chat_id_)
+if NumMnsha ==0 then 
+return "*•* مافيه احد مرفوع في البوت عشان امسحه \n!" 
+end
+redis:del(boss..':ll:'..msg.chat_id_)
+return "*•*أهلا عيني "..msg.TheRankCmd.."   \n• مسحت ( * "..NumMnsha.." * ) من الكلاب \n "
+end
+
+
+
+--======={ قرد }==========
+
+if MsgText[1] == "قائمة القرود" or MsgText[1] == "قائمة القرد" then 
+if not msg.Rank then end
+return gggg(msg) 
+end
+
+
+if MsgText[2] == "قائمة القرود" or MsgText[1] == "قائمة القرد" then
+if not msg.Rank then end
+local NumMnsha = redis:scard(boss..':gg:'..msg.chat_id_)
+if NumMnsha ==0 then 
+return "*•* مافيه احد مرفوع في البوت عشان امسحه \n!" 
+end
+redis:del(boss..':gg:'..msg.chat_id_)
+return "*•*أهلا عيني "..msg.TheRankCmd.."   \n• مسحت ( * "..NumMnsha.." * ) من القرود \n "
+end
+
+
+--======={ تيس }==========
+
+if MsgText[1] == "قائمة التيس" or MsgText[1] == "قائمة التيوس" then 
+if not msg.Rank then end
+return tttt(msg) 
+end
+
+
+if MsgText[2] == "قائمة التيس" or MsgText[2] == "قائمة التيوس" then
+if not msg.Rank then end
+local NumMnsha = redis:scard(boss..':tt:'..msg.chat_id_)
+if NumMnsha ==0 then 
+return "*•* مافيه احد مرفوع في البوت عشان امسحه \n!" 
+end
+redis:del(boss..':tt:'..msg.chat_id_)
+return "*•*أهلا عيني "..msg.TheRankCmd.."   \n• مسحت ( * "..NumMnsha.." * ) من التيوس \n "
+end
+
+
+--======={ ثور }==========
+
+
+if MsgText[1] == "قائمة الثور" or MsgText[1] == "قائمة الثيران" then 
+if not msg.Rank then end
+return ffff(msg) 
+end
+
+
+if MsgText[2] == "قائمة الثور" or MsgText[2] == "قائمة الثيران" then
+if not msg.Rank then end
+local NumMnsha = redis:scard(boss..':ff:'..msg.chat_id_)
+if NumMnsha ==0 then 
+return "*•* مافيه احد مرفوع في البوت عشان امسحه \n!" 
+end
+redis:del(boss..':ff:'..msg.chat_id_)
+return "*•*أهلا عيني "..msg.TheRankCmd.."   \n• مسحت ( * "..NumMnsha.." * ) من الثيران \n "
+end
+
+
+--======={ باعوص }==========
+
+if MsgText[1] == "قائمة البواعيص" or MsgText[1] == "قائمة الباعوص" then 
+if not msg.Rank then end
+return cccc(msg) 
+end
+
+
+if MsgText[2] == "قائمة البواعيص" or MsgText[2] == "قائمة الباعوص" then
+if not msg.Rank then end
+local NumMnsha = redis:scard(boss..':cc:'..msg.chat_id_)
+if NumMnsha ==0 then 
+return "*•* مافيه احد مرفوع في البوت عشان امسحه \n!" 
+end
+redis:del(boss..':cc:'..msg.chat_id_)
+return "*•*أهلا عيني "..msg.TheRankCmd.."   \n• مسحت ( * "..NumMnsha.." * ) من الثيران \n "
+end
+
+
+--======={ دجاجه }==========
+
+if MsgText[1] == "قائمة الدجاج" then 
+if not msg.Rank then end
+return dddd(msg) 
+end
+
+
+if MsgText[2] == "قائمة الدجاج" then
+if not msg.Rank then end
+local NumMnsha = redis:scard(boss..':dd:'..msg.chat_id_)
+if NumMnsha ==0 then 
+return "*•* مافيه احد مرفوع في البوت عشان امسحه \n!" 
+end
+redis:del(boss..':dd:'..msg.chat_id_)
+return "*•*أهلا عيني "..msg.TheRankCmd.."   \n• مسحت ( * "..NumMnsha.." * ) من الدجاج \n "
+end
+
+
+--======={ هطف }==========
+
+
+if MsgText[1] == "قائمة الهطوف" then 
+if not msg.Rank then end
+return aaaa(msg) 
+end
+
+
+if MsgText[2] == "قائمة الهطوف" then
+if not msg.Rank then end
+local NumMnsha = redis:scard(boss..':aa:'..msg.chat_id_)
+if NumMnsha ==0 then 
+return "*•* مافيه احد مرفوع في البوت عشان امسحه \n!" 
+end
+redis:del(boss..':aa:'..msg.chat_id_)
+return "*•*أهلا عيني "..msg.TheRankCmd.."   \n• مسحت ( * "..NumMnsha.." * ) من الهطوف \n "
+end
+
+
+--======={ صياد }==========
+
+
+if MsgText[1] == "قائمة الصيادين" then 
+if not msg.Rank then end
+return mmmm(msg) 
+end
+
+
+if MsgText[2] == "قائمة الصيادين" then
+if not msg.Rank then end
+local NumMnsha = redis:scard(boss..':mm:'..msg.chat_id_)
+if NumMnsha ==0 then 
+return "*•* مافيه احد مرفوع في البوت عشان امسحه \n!" 
+end
+redis:del(boss..':mm:'..msg.chat_id_)
+return "*•*أهلا عيني "..msg.TheRankCmd.."   \n• مسحت ( * "..NumMnsha.." * ) من الصيادين \n "
+end
+
+
+--======={ خاروف }==========
+
+if MsgText[1] == "قائمة الخرفان" or MsgText[1] == "قائمة الخاروف" then 
+if not msg.Rank then end
+return rrrr(msg) 
+end
+
+
+if MsgText[2] == "قائمة الخرفان" or MsgText[1] == "قائمة الخاروف" then
+if not msg.Rank then end
+local NumMnsha = redis:scard(boss..':rr:'..msg.chat_id_)
+if NumMnsha ==0 then 
+return "*•* مافيه احد مرفوع في البوت عشان امسحه \n!" 
+end
+redis:del(boss..':rr:'..msg.chat_id_)
+return "*•*أهلا عيني "..msg.TheRankCmd.."   \n• مسحت ( * "..NumMnsha.." * ) من الخرفان \n "
+end
+
+
+--====================={ end of list }===================
+
 if MsgText[1] == "رفع قرد" then
 if not MsgText[2] and msg.reply_id then
 GetMsgInfo(msg.chat_id_,msg.reply_id,function(arg,data)
